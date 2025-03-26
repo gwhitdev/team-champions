@@ -1,3 +1,9 @@
+# Team Champions
+*An interactive frontend project for Code Institute's Level 5 Diploma in Web Development*
+
+---
+## Contents
+
 1. User Experience (UX)
    - Project Goals
    - Developer Goals
