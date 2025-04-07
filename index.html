@@ -106,20 +106,32 @@
           <div id="team-questions">
             <!-- Placeholder for the questions and answers -->
           </div>
+          <button class="next-section-button" data-next="section-six">Next ></button>
         </div>
       </div>
 
       <div id="section-six" class="hide workbench">
         <div class="section-content">
           <h2>Results</h2>
+          <button class="next-section-button" data-next="section-seven">Review answers ></button>
         </div>
       </div>
 
+      <div id="section-seven" class="hide workbench">
+        <div class="section-content">
+          <h2>Review Your Answers</h2>
+        </div>
+      </div>
     </div>
   </main>
-<div id="modal" class="show workbench">
-  <div id="modal-header"></div>
-  <div id="modal-body"></div>
+<div id="modal" class="hide workbench">
+  <div id="modal-header">
+    <h1>Congratulations!</h1>
+    <button id="close-modal">X</button>
+  </div>
+  <div id="modal-body">
+    <h2>The winner is ...</h2>
+  </div>
 </div>
   <footer>
 
@@ -133,6 +145,7 @@
       {id: 1, name: 'Player 1'}
     ]};
   const playerNames = [];
+  const winner = {id: null};
   const symbols = ["🚹"];
 
   /*
@@ -144,6 +157,15 @@
   const inputs = document.getElementsByClassName('inputs');
   const playerButtons = document.getElementsByClassName('numOfPlayersButtons');
   const sectionButtons = document.querySelectorAll('.next-section-button');
+  const modal = document.getElementById('modal');
+  const body = document.getElementsByTagName('body')[0];
+  const closeModalButton = document.getElementById('close-modal');
+
+  closeModalButton.addEventListener('click', () => {
+    modal.classList.add('hide');
+    modal.classList.remove('show');
+    body.classList.remove('stop-scrolling');
+  });
 
   sectionButtons.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -160,6 +182,10 @@
         detectNewNameInput()
       }
 
+      if (nextSection === "section-six") {
+        modal.classList.add('show');
+        body.classList.add('stop-scrolling');
+      }
       window.location = `#${nextSection}`; // Move the user to the next section as defined above
     })
   });
@@ -240,6 +266,8 @@
   document.addEventListener('DOMContentLoaded', () => {
     createNewPlayerInputs();
   });
+
+
 
 </script>
 </body>

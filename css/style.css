@@ -20,6 +20,10 @@ h2 {
 .show {
   display: flex;
 }
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
 /* THE REST */
 
 
@@ -250,4 +254,11 @@ button:hover {
 #modal {
   background-color: var(--deepBlue);
   color: var(--deepPink);
+  width: 90%;
+  height: 80vh;
+  position: fixed;
+  bottom: -10%;
+  left: 5%;
+  box-shadow: var(--deepBlue) 0 1rem 1rem 0.5rem;
+  border: 1rem solid var(--deeperPink);
 }
