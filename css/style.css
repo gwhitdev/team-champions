@@ -1,247 +1,203 @@
-/*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
+@import url("./fonts.css");
+@import url("./colours.css");
+@import url("./animations.css");
 
-/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
 
 html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
+  scroll-behavior: smooth;
 }
-
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
-}
-
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
-}
-
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-  border: 0;
+body {
+  background-color: var(--deeperPink);
   margin: 0;
   padding: 0;
+  color: white;
 }
-
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-  resize: vertical;
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--deepBlue);
 }
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers
- */
-
-.hidden,
-[hidden] {
-  display: none !important;
+nav {
+  height: 10vh;
+  width: 100%;
+  background-color: var(--deepBlue);
+  position: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
 }
-
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  /* 1 */
+#brand {
+  font-size: 4rem;
+  padding: 1rem 5rem;
 }
-
-/*
- * Extends the .visually-hidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
-
-.visually-hidden.focusable:active,
-.visually-hidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: inherit;
-  width: auto;
+#menu {
+  padding: 1rem 5rem;
 }
-
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
-.invisible {
-  visibility: hidden;
+#header {
+  background-color: var(--deepBlue);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  height: 100vh;
 }
-
-/*
- * Clearfix: contain floats
- *
- * The use of `table` rather than `block` is only necessary if using
- * `::before` to contain the top-margins of child elements.
- */
-
-.clearfix::before,
-.clearfix::after {
+#hero {
+  padding: 5rem 0;
+  width: 98%;
+  height: 50vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#hero-image {
+  width: 50%;
+  height: 80%;
+  margin: 1rem 3.5rem;
+  background: url("../img/champion.jpg") no-repeat top center / cover;
+  border-radius: 100%;
+  border: 1rem solid var(--deeperPink);
+  box-shadow: var(--deepPink) 0 0 2.5rem 0;
+}
+#hero-text {
+  width: 100%;
+  height: 100%;
+  margin: 2rem 3.5rem;
+  color: var(--deeperPink);
+  align-items: center;
+}
+#welcome {
+  font-size: 5.5rem;
+  font-weight: bold;
+  line-height: 5rem;
+}
+#hero-text span {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+#hero-text span:last-child::after {
   content: "";
-  display: table;
+  width: 2rem;
+  height: 3rem;
+  display: inherit;
+  background-color: var(--deeperPink);
+  animation: cursor-blink 1.5s steps(2) infinite;
+}
+#welcome-paragraph {
+  font-size: 2rem;
+  line-height: 3.5rem;
+}
+#subject-input {
+  margin-top: 1rem;
+  width: 100%;
+  height: 3rem;
+  font-size: 2.5rem;
+  background-color: var(--deepBlue);
+  text-align: center;
+  border: 0.3rem solid var(--deeperPink);
+  color: var(--deeperPink);
+
+}
+#subject-input {
+ caret-color: var(--deepBlue);
+}
+#subject-input::placeholder {
+  color: var(--deeperPink);
+}
+#subject-input:focus::placeholder {
+  color: white;
+}
+#subject-input:focus {
+  outline: none;
+  color: white;
+}
+#subject-input:active {
+  color: white;
+  border: 0.3rem solid white;
+}
+button {
+  background-color: var(--deepBlue);
+  color: var(--deeperPink);
+  border: 0.3rem solid var(--deeperPink);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 0 1rem 0 darkslateblue;
+}
+button:hover {
+  box-shadow: 0 0 1.5rem 0 var(--deepPink);
+}
+#section-one {
+  background-color: var(--deeperPink);
+}
+#image {
+  width: 100%;
+  height: 200vh;
+  background: url("../img/trees.jpg") no-repeat top center fixed;
 }
 
-.clearfix::after {
-  clear: both;
+#section-two {
+  background-color: var(--deeperPink);
+  height: 100vh;
+  width: 100%;
+  color: black;
+  text-align: left;
+  display: flex;
+}
+#section-two h2 {
+  font-size: 5rem;
+}
+#section-two-content {
+  width: 60%;
+  margin: 0 auto;
+  line-height: 8rem;
+  height: 100vh;
+}
+#number-of-players {
+  font-size: 4rem;
+}
+#number-of-players {
+  cursor: pointer;
+}
+#number-of-players::after {
+  content: "";
+  width: 2rem;
+  height: 3rem;
+  display: inline-block;
+  background-color: var(--deepBlue);
+  animation: cursor-blink 1.5s steps(2) infinite;
+}
+#players {
+  display: flex;
+  flex-direction: column;
+}
+#player-names {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 1rem;
+}
+#inputs input {
+  background-color: var(--deepBlue);
+  height: 4rem;
+  color: var(--deeperPink);
+  font-size: 3.5rem;
+  cursor: pointer;
+}
+#inputs input::placeholder {
+  color: var(--deeperPink);
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+#section-three {
+  height: 100vh;
 }
-
-@media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
-  /* Style adjustments for high resolution devices */
-}
-
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   https://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
-
-@media print {
-  *,
-  *::before,
-  *::after {
-    background: #fff !important;
-    color: #000 !important;
-    /* Black prints faster */
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]::after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]::after {
-    content: " (" attr(title) ")";
-  }
-
-  /*
-   * Don't show links that are fragment identifiers,
-   * or use the `javascript:` pseudo protocol
-   */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
-  }
-
-  pre {
-    white-space: pre-wrap !important;
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-

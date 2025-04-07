@@ -20,14 +20,160 @@
 
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#fafafa">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Honk&family=Nabla&family=Workbench&display=swap" rel="stylesheet">
 </head>
 
 <body>
+<nav>
+  <div id="brand" class="honk">Team Champions</div>
+  <div id="menu">MENU</div>
+</nav>
+  <main>
+    <div id="header">
+      <div id="hero">
+        <div id="hero-image"></div>
+        <div id="hero-text">
+          <h1 id="welcome" class="honk">
+            Welcome to<br>Team Champions
+          </h1>
+          <div id="welcome-paragraph" class="workbench">
+            <label for="subject-input">
+              <span>
+              Choose your subject and let
+            </span>
+              <span>
+              artificial intelligence do the rest ...
+            </span>
+            </label>
+            <p>
+              <input autocomplete="false" type="text" id="subject-input" placeholder="Enter your chosen subject here" class="workbench">
+            </p>
+            <button class="next-section-button" data-next="section-two">Next</button>
+          </div>
+        </div>
+      </div>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+    </div>
+
+    <div id="section-one">
+      <div id="image">
+      </div>
+    </div>
+    <div id="section-two" class="workbench">
+      <div id="section-two-content">
+        <h2 id="number-question-1" class="show">How many players?</h2>
+        <span id="number-of-players-1"><!-- Space for displaying number of players selected--></span>
+        <div id="players">
+          <div id="numOfPlayersButtons">
+            <button id="less" class="numOfPlayersButtons workbench">< LESS </button>
+            <button id="more" class="numOfPlayersButtons workbench">MORE ></button>
+          </div>
+          <div id="symbols">
+            🚹
+          </div>
+          <div>
+            <button class="next-section-button" data-next="section-three">Next ></button>
+          </div>
+          <div id="section-three" class="hide workbench">
+            <h2>Player Names</h2>
+            <div id="inputs">
+              <!-- Space for programmatically creating inputs for player names -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer>
+
+  </footer>
   <script src="js/app.js"></script>
+<script>
+  const userInput = {numberOfPlayers: 1, players:[
+      {id: 1, name: 'Player 1'}
+    ]};
 
+  const number = document.querySelector('#number-of-players');
+  const playersDiv = document.querySelector('#inputs');
+
+  const sectionButtons = document.querySelectorAll('.next-section-button');
+  sectionButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      console.log(e.target)
+      const nextSection = e.target.dataset.next;
+      document.getElementById(nextSection).classList.remove('hide');
+      document.getElementById(nextSection).classList.add('show');
+      window.location = `#${nextSection}`;
+    })
+  });
+
+  const symbolsDiv = document.getElementById('symbols');
+  const symbols = ["🚹"];
+
+  function createPlayerSymbols() {
+    if (symbols.length >= 1 && symbols.length <= 10) {
+      symbolsDiv.innerHTML = symbols.join('');
+    }
+  }
+
+  const playerNames = [];
+  let inputs = [];
+
+  function handleNumOfPlayersButtons(eventTarget) {
+    if (eventTarget.id === "more" && userInput.numberOfPlayers < 10) {
+      userInput.numberOfPlayers = ++userInput.numberOfPlayers;
+      symbols.push("🚹");
+
+    }
+    if (eventTarget.id === "less" && userInput.numberOfPlayers >= 2 && userInput.numberOfPlayers <= 10) {
+      userInput.numberOfPlayers = --userInput.numberOfPlayers;
+      symbols.pop();
+    }
+    inputs =  document.getElementsByClassName('name-input');
+
+    createPlayerSymbols();
+    playersDiv.innerHTML = " ";
+    createNewPlayerInputs()
+    for (let input of inputs) {
+      input.addEventListener('input', (e) => {
+        let name = e.target.value;
+        playerNames[Number(e.target.id)] = name;
+        console.log(name)
+
+      })
+
+    }
+
+  }
+    function createNewPlayerInputs() {
+
+    for (let i = 0; i < userInput.numberOfPlayers; i++) {
+      const player = document.createElement('input');
+      const num = i+1;
+      player.id = `player-${num}`;
+      player.placeholder = `Player ${num}'s name`;
+      player.classList.add('workbench');
+      player.classList.add('inputs');
+
+      player.dataset.id = `${num}`;
+      playersDiv.appendChild(player);
+    }
+
+  }
+
+
+  const playerButtons = document.getElementsByClassName('numOfPlayersButtons');
+  for (let button of playerButtons) {
+    button.addEventListener('click', e => handleNumOfPlayersButtons(e.target));
+  }
+
+  document.addEventListener('DOMContentLoaded', () => createNewPlayerInputs());
+
+</script>
 </body>
 
 </html>

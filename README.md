@@ -62,11 +62,15 @@ amount of players and will provide a readout of players' scores at the end.
 
 - About us Page
 - Contact Us Page
+- Thank you Page
+- 404 Error Page
 
 #### Desktop
 - Landing and Quiz Setup Page
 - About us Page
 - Contact Us Page
+- Thank you Page
+- 404 Error Page
 
 ---
 
