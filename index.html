@@ -126,11 +126,14 @@
   </main>
 <div id="modal" class="hide workbench">
   <div id="modal-header">
-    <h1>Congratulations!</h1>
-    <button id="close-modal">X</button>
+    <h2>The winner is...</h2>
+    <button id="close-modal">X CLOSE</button>
   </div>
-  <div id="modal-body">
-    <h2>The winner is ...</h2>
+  <div id="countdown">
+    <!-- Countdown timer -->
+  </div>
+  <div id="modal-body" class="hide">
+    <h1>Congratulations <span id="winner"><!-- Placeholder for winning player's name --></span></h1>
   </div>
 </div>
   <footer>
@@ -181,10 +184,23 @@
       if (nextSection === "section-three") {
         detectNewNameInput()
       }
-
+      const congratsElement = document.getElementById('modal-body')
       if (nextSection === "section-six") {
         modal.classList.add('show');
         body.classList.add('stop-scrolling');
+        let timeLeft = 4;
+        const countdown = document.getElementById('countdown');
+        const interval = setInterval(() => {
+          countdown.innerText = String(--timeLeft);
+          if (timeLeft === 0) {
+            countdown.innerText = "";
+            countdown.classList.add('hide')
+            clearInterval(interval)
+          }
+        },1000)
+        setTimeout(() => {
+          congratsElement.classList.remove('hide');
+        },4000)
       }
       window.location = `#${nextSection}`; // Move the user to the next section as defined above
     })

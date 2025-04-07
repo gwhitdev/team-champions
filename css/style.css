@@ -254,11 +254,26 @@ button:hover {
 #modal {
   background-color: var(--deepBlue);
   color: var(--deepPink);
-  width: 90%;
+  width: 85%;
   height: 80vh;
   position: fixed;
   bottom: -10%;
   left: 5%;
   box-shadow: var(--deepBlue) 0 1rem 1rem 0.5rem;
   border: 1rem solid var(--deeperPink);
+  flex-direction: column;
+  padding: 0 2rem;
+}
+
+#modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#close-modal {
+  height: 5rem;
+  padding: 0 2rem;
+  margin-top: 3rem;
+  font-weight: bold;
 }
