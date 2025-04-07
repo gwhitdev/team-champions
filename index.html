@@ -56,35 +56,59 @@
       </div>
 
     </div>
-
-    <div id="section-one">
-      <div id="image">
+    <div id="content">
+      <div id="section-one">
+        <div id="image">
+        </div>
       </div>
-    </div>
-    <div id="section-two" class="workbench">
-      <div id="section-two-content">
-        <h2 id="number-question-1" class="show">How many players?</h2>
-        <span id="number-of-players-1"><!-- Space for displaying number of players selected--></span>
-        <div id="players">
-          <div id="numOfPlayersButtons">
-            <button id="less" class="numOfPlayersButtons workbench">< LESS </button>
-            <button id="more" class="numOfPlayersButtons workbench">MORE ></button>
+
+      <div id="section-two" class="hide workbench">
+        <div class="section-content">
+          <h2 id="number-question-1" class="show">How many players?</h2>
+          <span id="number-of-players-1"><!-- Space for displaying number of players selected--></span>
+          <div id="players">
+            <div id="numOfPlayersButtons">
+              <button id="less" class="numOfPlayersButtons workbench">< LESS </button>
+              <button id="more" class="numOfPlayersButtons workbench">MORE ></button>
+            </div>
+            <div id="symbols">
+              🚹
+            </div>
+            <div>
+              <button class="next-section-button" data-next="section-three">Next ></button>
+            </div>
           </div>
-          <div id="symbols">
-            🚹
-          </div>
-          <div>
-            <button class="next-section-button" data-next="section-three">Next ></button>
-          </div>
-          <div id="section-three" class="hide workbench">
+        </div>
+      </div>
+
+        <div id="section-three" class="hide workbench">
+          <div class="section-content">
             <h2>Player Names</h2>
             <div id="inputs">
               <!-- Space for programmatically creating inputs for player names -->
             </div>
+            <button class="next-section-button" data-next="section-four">Next ></button>
           </div>
 
         </div>
+
+        <div class="hide workbench" id="section-four">
+          <div class="section-content">
+              <h2>Thank you.</h2>
+              <h2>Click next or press ENTER to see your team's questions.<span class="blink"></span></h2>
+            <button class="next-section-button" data-next="section-five">Next ></button>
+          </div>
+       </div>
+
+      <div id="section-five" class="hide workbench">
+        <div class="section-content">
+          <h2>Your Questions</h2>
+          <div id="team-questions">
+            <!-- Placeholder for the questions and answers -->
+          </div>
+        </div>
       </div>
+
 
     </div>
   </main>
