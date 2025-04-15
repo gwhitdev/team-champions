@@ -26,11 +26,15 @@
 </head>
 
 <body>
-<nav>
+<nav class="hide">
   <div id="brand" class="honk">Team Champions</div>
-  <div id="menu">MENU</div>
+  <div>
+    <button id="close-nav">X CLOSE</button>
+  </div>
 </nav>
   <main>
+    <button id="open-nav">OPEN NAVIGATION</button>
+
     <div id="header">
       <div id="hero">
         <div id="hero-image"></div>
@@ -163,6 +167,20 @@
   const modal = document.getElementById('modal');
   const body = document.getElementsByTagName('body')[0];
   const closeModalButton = document.getElementById('close-modal');
+  const openNavButton = document.getElementById('open-nav');
+  const nav = document.getElementsByTagName('nav')[0];
+  const closeNavButton = document.getElementById('close-nav');
+
+  closeNavButton.addEventListener('click', () => {
+    nav.classList.add('hide');
+    nav.classList.remove('show-nav')
+  });
+
+  openNavButton.addEventListener('click', () => {
+    nav.classList.remove('hide');
+    nav.classList.add('show-nav');
+    body.classList.add('stop-scrolling');
+  })
 
   closeModalButton.addEventListener('click', () => {
     modal.classList.add('hide');
@@ -170,38 +188,51 @@
     body.classList.remove('stop-scrolling');
   });
 
+  const sectionThree = () => {
+    // Detect if the current section is section three and the re-populate inputs with already entered names
+    // for consistency if the user changes the number of players.
+    detectNewNameInput()
+  };
+
+  const sectionSix = () => {
+    const congratsElement = document.getElementById('modal-body')
+      modal.classList.add('show');
+      body.classList.add('stop-scrolling');
+      const timeLeft = {seconds: 4};
+      const countdown = document.getElementById('countdown');
+
+      const interval = setInterval(() => {
+        countdown.innerText = String(--timeLeft.seconds);
+
+        if (timeLeft.seconds === 0) {
+          countdown.innerText = "";
+          countdown.classList.add('hide')
+          clearInterval(interval)
+        }
+
+      },1000)
+
+      setTimeout(() => {
+        congratsElement.classList.remove('hide');
+      },4000)
+  };
+
+  const sections = {
+    'section-three': sectionThree,
+    'section-six': sectionSix
+  };
+
   sectionButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-      console.log(e.target)
       const nextSection = e.target.dataset.next;
+
+      if (Object.keys(sections).includes(nextSection)) {
+        sections[nextSection]();
+      }
+
       document.getElementById(nextSection).classList.remove('hide');
       document.getElementById(nextSection).classList.add('show');
 
-      /*
-        Detect if the current section is section two and the re-populate inputs with already entered names
-        for consistency if the user changes the number of players.
-       */
-      if (nextSection === "section-three") {
-        detectNewNameInput()
-      }
-      const congratsElement = document.getElementById('modal-body')
-      if (nextSection === "section-six") {
-        modal.classList.add('show');
-        body.classList.add('stop-scrolling');
-        let timeLeft = 4;
-        const countdown = document.getElementById('countdown');
-        const interval = setInterval(() => {
-          countdown.innerText = String(--timeLeft);
-          if (timeLeft === 0) {
-            countdown.innerText = "";
-            countdown.classList.add('hide')
-            clearInterval(interval)
-          }
-        },1000)
-        setTimeout(() => {
-          congratsElement.classList.remove('hide');
-        },4000)
-      }
       window.location = `#${nextSection}`; // Move the user to the next section as defined above
     })
   });

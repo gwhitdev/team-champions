@@ -43,14 +43,25 @@ main {
   background-color: var(--deepBlue);
 }
 nav {
-  height: 10vh;
-  width: 100%;
-  background-color: var(--deepBlue);
-  position: inherit;
-  display: flex;
+  height: 100vh;
+  width: 80%;
+  background-color: var(--deeperPink);
+  position: fixed;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
+  z-index: 100;
+}
+.show-nav {
+  display: flex;
+}
+#open-nav {
+  /*border: 0;*/
+  box-shadow: none;
+  width: 15%;
+  margin: 2rem auto;
+}
+#close-nav {
+
 }
 #brand {
   font-size: 4rem;
