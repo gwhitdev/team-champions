@@ -215,12 +215,20 @@ Accessibility
 ---
 
 ## 3. Technologies Used
-- JavaScript
-- HTML
-- CSS
-- AI API
-- NodeJS including WebPack
+- [Languages](#languages)
+- [Frameworks and Libraries](#frameworks--libraries)
+- [Software & Tools](#software--tools)
+
+### Languages
+**JavaScript**
+
+### Frameworks & Libraries
+- NodeJS
+
+### Software & Tools
 - Heroku
+- JetBrains WebStorm
+
 
 
 [[Back to contents]](#contents)
