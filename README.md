@@ -55,22 +55,14 @@ amount of players and will provide a readout of players' scores at the end.
 ---
 
 ## 3. Wireframes
-#### Mobile
-- Landing and Quiz Setup Page
+- Quiz Page
 
-!['Landing and Quiz Setup Page'](./docs/screenshots/wireframes/Landing-Page-(Mobile).webp 'Landing Page')
+<img src="./docs/screenshots/wireframes/quiz-page.png" height="500" alt="Quiz Page" title="Quiz Page">
 
-- About us Page
-- Contact Us Page
-- Thank you Page
-- 404 Error Page
+- Utility Panel
 
-#### Desktop
-- Landing and Quiz Setup Page
-- About us Page
-- Contact Us Page
-- Thank you Page
-- 404 Error Page
+<img src="./docs/screenshots/wireframes/utility-panel.png" height="500" alt="Quiz Page" title="Quiz Page">
+
 
 ---
 
