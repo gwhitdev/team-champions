@@ -6,7 +6,7 @@ const proxy = {
   result: {},
   loading: {state: false},
   getQuestionsAndAnswers: function(subject) {
-    fetch(`http://${this.baseUrl}/proxy?subject=${subject}`,this.options)
+    fetch(`${this.baseUrl}/proxy?subject=${subject}`,this.options)
       .then(response => response.json())
       .then(data => {
         console.log(data)
