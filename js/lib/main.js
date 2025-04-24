@@ -1,4 +1,4 @@
-import proxy from './proxy.mjs';
+import proxy from './proxy.js';
 
 /*
   Setup initial state
