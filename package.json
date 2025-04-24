@@ -9,6 +9,7 @@
   "license": "",
   "author": "",
   "scripts": {
+    "prestart": "npm install -D webpack-cli",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --open --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
