@@ -1,5 +1,5 @@
 const proxy = {
-  baseUrl: "https://champions-proxy-api-f96177dcdfbf.herokuapp.com/",
+  baseUrl: "champions-proxy-api-f96177dcdfbf.herokuapp.com/",
   options: {
     method: "GET"
   },
