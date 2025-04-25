@@ -44,12 +44,45 @@ main {
 }
 nav {
   height: 100vh;
-  width: 80%;
-  background-color: var(--deeperPink);
+  width: 100%;
+  background-color: var(--deepBlue);
   position: fixed;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   z-index: 100;
+  overflow: auto;
+}
+nav p, nav ul{
+  font-size: 2rem;
+  line-height: 3rem;
+}
+nav form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 2rem;
+  line-height: 3rem;
+}
+nav input[type="checkbox"]{
+  transform: scale(2);
+}
+nav input[type="text"], nav input[type="email"] {
+  height: 2rem;
+}
+#nav-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  padding: 1rem 5rem;
+}
+#nav-content {
+  displaY: flex;
+  flex-direction: column;
+  padding: 1rem 5rem;
+  width: 50%;
+}
+nav h2 {
+  font-size: 3rem;
 }
 .show-nav {
   display: flex;
@@ -60,9 +93,7 @@ nav {
   width: 15%;
   margin: 2rem auto;
 }
-#close-nav {
 
-}
 #brand {
   font-size: 4rem;
   padding: 1rem 5rem;
