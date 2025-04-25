@@ -3,17 +3,11 @@
 @import url("./animations.css");
 
 /* GLOBALS */
+
 h2 {
   font-size: 5rem;
 }
-.blink::after {
-  content: "";
-  width: 2rem;
-  height: 3rem;
-  display: inline-block;
-  background-color: var(--deepBlue);
-  animation: cursor-blink 1.5s steps(2) infinite;
-}
+
 .hide {
   display: none;
 }
@@ -24,6 +18,17 @@ h2 {
   height: 100%;
   overflow: hidden;
 }
+
+button {
+  color: var(--white)!important;
+  width: 100%;
+  height: 5rem;
+  margin: 0 auto;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-family: Workbench;
+}
+
 /* THE REST */
 
 
@@ -88,10 +93,8 @@ nav h2 {
   display: flex;
 }
 #open-nav {
-  /*border: 0;*/
   box-shadow: none;
-  width: 15%;
-  margin: 2rem auto;
+  margin: 0 auto 2rem auto;
 }
 
 #brand {
@@ -104,59 +107,74 @@ nav h2 {
 #header {
   background-color: var(--deepBlue);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   height: 100vh;
 }
 #hero {
-  padding: 5rem 0;
-  width: 98%;
+  display: flex;
+  width: 100%;
   height: 50vh;
   margin: 0 auto;
-  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
+#hero-and-text {
+  display: flex;
+  flex-direction: row;
+}
 #hero-image {
-  width: 50%;
+  width: 80%;
   height: 80%;
-  margin: 1rem 3.5rem;
   background: url("../img/champion.jpg") no-repeat top center / cover;
   border-radius: 100%;
   border: 1rem solid var(--deeperPink);
   box-shadow: var(--deepPink) 0 0 2.5rem 0;
+  margin: 0 auto;
 }
 #hero-text {
   width: 100%;
   height: 100%;
-  margin: 2rem 3.5rem;
   color: white;
   align-items: center;
 }
 #welcome {
-  font-size: 5.5rem;
+  font-size: 4rem;
   font-weight: bold;
-  line-height: 5rem;
+  line-height: 3rem;
+  text-align: left;
+  margin: 0 3rem;
 }
-#hero-text span {
+
+#hero-text span:not(.blink) {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-#hero-text span:last-child::after {
+
+span.blink {
+  display: inline;
+}
+.blink::after {
   content: "";
   width: 2rem;
-  height: 3rem;
-  display: inherit;
+  color: var(--deepBlue);
+  height: 3.5rem;
+  display: inline-block;
   background-color: var(--white);
   animation: cursor-blink 1.5s steps(2) infinite;
+  vertical-align: middle;
+  margin-left: -2px;
+  position: relative;
 }
 #welcome-paragraph {
   font-size: 2rem;
   line-height: 3.5rem;
+  margin: 3rem;
+  text-align: left;
 }
 #subject-input {
   margin-top: 1rem;
@@ -298,6 +316,14 @@ button:hover {
   flex-direction: column;
 }
 
+#section-seven {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+
+
+
 #modal {
   background-color: var(--deepBlue);
   color: var(--white);
@@ -323,4 +349,46 @@ button:hover {
   padding: 0 2rem;
   margin-top: 3rem;
   font-weight: bold;
+}
+
+/** BREAK POINTS **/
+
+@media only screen and (min-width: 596px) {
+  button {
+    width: 31rem;
+    height: 8rem;
+    margin: 0 auto;
+  }
+  #header {
+    width: 80%;
+  }
+  #hero {
+    padding: 5rem 0;
+    width: 98%;
+    display: flex;
+  }
+  #hero-and-text {
+    flex-direction: column;
+    height: auto;
+  }
+  #hero-text {
+    width: 100%;
+    height: 100%;
+    margin: 2rem 3.5rem;
+    color: white;
+    align-items: center;
+  }
+  #hero-image {
+    width: 50%;
+    height: 80%;
+    margin: 1rem 3.5rem;
+  }
+  #welcome {
+    font-size: 9rem;
+    line-height: 8rem;
+  }
+  #welcome-paragraph {
+    margin: auto;
+    text-align: left;
+  }
 }

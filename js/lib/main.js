@@ -28,7 +28,8 @@ const closeNavButton = document.getElementById('close-nav');
 
 closeNavButton.addEventListener('click', () => {
   nav.classList.add('hide');
-  nav.classList.remove('show-nav')
+  nav.classList.remove('show-nav');
+  body.classList.remove('stop-scrolling');
 });
 
 openNavButton.addEventListener('click', () => {
@@ -39,7 +40,7 @@ openNavButton.addEventListener('click', () => {
 
 closeModalButton.addEventListener('click', () => {
   modal.classList.add('hide');
-  modal.classList.remove('show');
+  modal.classList.remove('show-nav');
   body.classList.remove('stop-scrolling');
 });
 

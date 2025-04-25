@@ -27,7 +27,7 @@
 <nav class="hide">
   <div id="nav-header">
     <div>
-      <button id="close-nav">X CLOSE</button>
+      <button id="close-nav">X CLOSE PANEL</button>
     </div>
   </div>
 
@@ -52,7 +52,6 @@
           <li>Timers</li>
           <li>And lots more!</li>
         </ul>
-      </p>
       <h2 class="honk">Request a feature</h2>
       <div id="form" class="workbench">
         <form id="feature-request">
@@ -84,33 +83,28 @@
 <body>
 
   <main>
-    <button id="open-nav">OPEN NAVIGATION</button>
+    <button id="open-nav">OPEN PANEL</button>
 
     <div id="header">
       <div id="hero">
-        <div id="hero-image"></div>
         <div id="hero-text">
           <h1 id="welcome" class="honk">
             Welcome to<br>Team Champions
           </h1>
-          <div id="welcome-paragraph" class="workbench">
-            <label for="subject-input">
-              <span>
-              Choose your subject and let
-            </span>
-              <span>
-              artificial intelligence do the rest ...
-            </span>
-            </label>
-            <p>
-              <input autocomplete="off" type="text" id="subject-input" placeholder="Enter your chosen subject here" class="workbench">
-            </p>
-            <button class="next-section-button" data-next="section-two">Next</button>
-          </div>
+            <div id="welcome-paragraph" class="workbench">
+                <p>
+                  Choose your subject and let
+                  artificial intelligence do the rest ... <span class="blink"></span>
+                </p>
+              <p>
+                <input autocomplete="off" type="text" id="subject-input" placeholder="Enter a subject" class="workbench">
+              </p>
+              <button class="next-section-button" data-next="section-two">Next &#11167;</button>
+            </div>
         </div>
       </div>
-
     </div>
+
     <div id="content">
       <div id="section-one">
         <div id="image">
@@ -123,14 +117,14 @@
           <span id="number-of-players-1"><!-- Space for displaying number of players selected--></span>
           <div id="players">
             <div id="numOfPlayersButtons">
-              <button id="less" class="numOfPlayersButtons workbench">LESS </button>
-              <button id="more" class="numOfPlayersButtons workbench">MORE</button>
+              <button id="less" class="numOfPlayersButtons workbench">&#11164; LESS </button>
+              <button id="more" class="numOfPlayersButtons workbench">MORE &#11166;</button>
             </div>
             <div id="symbols">
               🚹
             </div>
             <div>
-              <button class="next-section-button" data-next="section-three">Next</button>
+              <button class="next-section-button" data-next="section-three">Next &#11167;</button>
             </div>
           </div>
         </div>
@@ -142,7 +136,7 @@
             <div id="inputs">
               <!-- Space for programmatically creating inputs for player names -->
             </div>
-            <button class="next-section-button" data-next="section-four">Next</button>
+            <button class="next-section-button" data-next="section-four">Next &#11167;</button>
           </div>
 
         </div>
@@ -151,7 +145,7 @@
           <div class="section-content">
               <h2>Thank you.</h2>
               <h2>Click next or press ENTER to see your team's questions.<span class="blink"></span></h2>
-            <button class="next-section-button" data-next="section-five">Next</button>
+            <button class="next-section-button" data-next="section-five">Next &#11167;</button>
           </div>
        </div>
 
@@ -161,24 +155,30 @@
           <div id="team-questions">
             <!-- Placeholder for the questions and answers -->
           </div>
-          <button class="next-section-button" data-next="section-six">Next</button>
+          <button class="next-section-button" data-next="section-six">Next &#11167;</button>
         </div>
       </div>
 
       <div id="section-six" class="hide workbench">
         <div class="section-content">
           <h2>Results</h2>
-          <button class="next-section-button" data-next="section-seven">Review answers ></button>
+          <button class="next-section-button" data-next="section-seven">Review answers &#11167;</button>
         </div>
       </div>
 
       <div id="section-seven" class="hide workbench">
         <div class="section-content">
           <h2>Review Your Answers</h2>
+          <button class="workbench">
+            Play again?
+          </button>
         </div>
+
       </div>
+
     </div>
   </main>
+
 <div id="modal" class="hide workbench">
   <div id="modal-header">
     <h2>The winner is...</h2>
@@ -191,9 +191,6 @@
     <h1>Congratulations <span id="winner"><!-- Placeholder for winning player's name --></span></h1>
   </div>
 </div>
-  <footer>
-
-  </footer>
   <script src="js/bootstrap.js" type="module"></script>
 
 </body>
