@@ -19,6 +19,7 @@ h2 {
   overflow: hidden;
 }
 
+
 button {
   color: var(--white)!important;
   width: 100%;
@@ -34,12 +35,18 @@ button {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: 2rem;
+  scrollbar-color: var(--deepPink) var(--deepBlue);
+}
+html::-webkit-scrollbar {
+  width: 12px;
 }
 body {
   background-color: var(--deeperPink);
   margin: 0;
   padding: 0;
   color: white;
+
 }
 main {
   display: flex;
@@ -55,6 +62,24 @@ nav {
   flex-direction: column;
   z-index: 100;
   overflow: auto;
+
+
+}
+
+
+
+nav::-webkit-scrollbar-track {
+  background: var(--deepBlue);
+}
+
+nav::-webkit-scrollbar-thumb {
+  background-color: var(--deepPink);
+  border-radius: 6px;
+  border: 3px solid var(--deepBlue);
+}
+
+nav::-webkit-scrollbar-thumb:hover {
+  background-color: var(--deeperPink);
 }
 nav p, nav ul{
   font-size: 2rem;
@@ -224,9 +249,7 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
-#section-one {
-  background-color: var(--deeperPink);
-}
+
 #image {
   width: 100%;
   height: 200vh;
@@ -234,10 +257,9 @@ button:hover {
 }
 
 #section-two {
-  background-color: var(--deeperPink);
   height: 100vh;
   width: 100%;
-  color: black;
+  color: var(--white);
   text-align: left;
 }
 
@@ -246,6 +268,7 @@ button:hover {
   margin: 0 auto;
   line-height: 8rem;
   height: 100vh;
+  color: var(--white);
 }
 #number-of-players {
   font-size: 4rem;
@@ -262,10 +285,8 @@ button:hover {
   animation: cursor-blink 1.5s steps(2) infinite;
 }
 #section-three {
-  background-color: var(--deeperPink);
   height: 100vh;
   width: 100%;
-  color: black;
   text-align: left;
 }
 #players {
@@ -290,28 +311,22 @@ button:hover {
 }
 
 #section-four {
-  background-color: var(--deeperPink);
   height: 100vh;
   width: 100%;
-  color: black;
   text-align: left;
   flex-direction: column;
 }
 
 #section-five {
-  background-color: var(--deeperPink);
   height: 100vh;
   width: 100%;
-  color: black;
   text-align: left;
   flex-direction: column;
 }
 
 #section-six {
-  background-color: var(--deeperPink);
   height: 100vh;
   width: 100%;
-  color: black;
   text-align: left;
   flex-direction: column;
 }
@@ -354,10 +369,17 @@ button:hover {
 /** BREAK POINTS **/
 
 @media only screen and (min-width: 596px) {
+
   button {
     width: 31rem;
     height: 8rem;
     margin: 0 auto;
+    background-color: var(--deeperPink);
+
+  }
+  #open-nav {
+    margin-top: 3rem;
+    color: var(--deepBlue);
   }
   #header {
     width: 80%;
@@ -386,9 +408,17 @@ button:hover {
   #welcome {
     font-size: 9rem;
     line-height: 8rem;
+    margin: 0 auto;
   }
   #welcome-paragraph {
     margin: auto;
     text-align: left;
+  }
+  #subject-input {
+    width: 50%;
+    height: 8rem;
+  }
+  nav {
+    width: 65%;
   }
 }
