@@ -7,7 +7,6 @@
   <title></title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="description" content="">
-
   <meta property="og:title" content="">
   <meta property="og:type" content="">
   <meta property="og:url" content="">
@@ -80,8 +79,8 @@
     </div>
   </div>
 </nav>
-<body>
 
+<body>
   <main>
     <button id="open-nav">OPEN PANEL</button>
 
@@ -139,7 +138,6 @@
             </div>
             <button class="next-section-button" data-next="section-four">Next &#11167;</button>
           </div>
-
         </div>
 
         <div class="hide workbench section" id="section-four">
@@ -174,26 +172,23 @@
             Play again?
           </button>
         </div>
-
       </div>
 
     </div>
   </main>
 
-<div id="modal" class="hide workbench">
-  <div id="modal-header">
-    <h2>The winner is...</h2>
-    <button id="close-modal">X CLOSE</button>
+  <div id="modal" class="hide workbench">
+    <div id="modal-header">
+      <h2>The winner is...</h2>
+      <button id="close-modal">X CLOSE</button>
+    </div>
+    <div id="countdown">
+      <!-- Countdown timer -->
+    </div>
+    <div id="modal-body" class="hide">
+      <h1>Congratulations <span id="winner"><!-- Placeholder for winning player's name --></span></h1>
+    </div>
   </div>
-  <div id="countdown">
-    <!-- Countdown timer -->
-  </div>
-  <div id="modal-body" class="hide">
-    <h1>Congratulations <span id="winner"><!-- Placeholder for winning player's name --></span></h1>
-  </div>
-</div>
   <script src="js/bootstrap.js" type="module"></script>
-
 </body>
-
 </html>

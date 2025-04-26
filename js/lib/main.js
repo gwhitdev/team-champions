@@ -1,5 +1,5 @@
-import proxy from './proxy.js';
-
+import Proxy from './proxy.js';
+import { arrayHasLengthOfZeroOrIsNull} from "./helpers.js";
 /*
   Setup initial state
   */
@@ -40,12 +40,13 @@ openNavButton.addEventListener('click', () => {
 
 closeModalButton.addEventListener('click', () => {
   modal.classList.add('hide');
-  modal.classList.remove('show-nav');
+  modal.classList.remove('show');
   body.classList.remove('stop-scrolling');
 });
 
-const sectionTwo = (subject) => {
-  proxy.getQuestionsAndAnswers(subject)
+
+const sectionTwo = async (subject) => {
+  Proxy.getQuestionsAndAnswers(subject)
 }
 
 const sectionThree = (subject = null) => {
@@ -53,6 +54,45 @@ const sectionThree = (subject = null) => {
   // for consistency if the user changes the number of players.
   detectNewNameInput()
 };
+
+const sectionFive = (subject = null) => {
+  const questions = Proxy.result.questions;
+  const answers = Proxy.result.answers;
+  console.log("Qs & As: ", Proxy.result);
+
+  if (arrayHasLengthOfZeroOrIsNull(questions) || arrayHasLengthOfZeroOrIsNull(answers)) {
+    alert("There was an error loading the questions and answers. Please try again later.");
+  } else {
+    const panels = [];
+
+    // Create question panels and hide them apart from the first
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+      const answer = answers[i];
+      const panel = document.createElement('div');
+      panel.classList.add('question-panel');
+      if (i > 0) {
+        panel.classList.add('hide');
+      }
+      panel.id = `question-${i+1}`;
+      panel.innerHTML = `
+         <div class="question-number">${i+1} ${question}</div>
+          <button class="question-button" data-nextquestion="${i+1}">Next Question</button>
+      `;
+      panels.push(panel);
+    }
+    document.getElementById('team-questions').append(...panels);
+  }
+
+  const questionButtons = document.querySelectorAll('.question-button');
+  for (let button of questionButtons) {
+    button.addEventListener('click', (e) => {
+      const nextQuestion = Number(e.target.dataset.nextquestion) + 1;
+      document.getElementById(`question-${nextQuestion}`).classList.remove('hide');
+      document.getElementById(`question-${nextQuestion-1}`).classList.add('hide');
+    })
+  }
+}
 
 const sectionSix = (subject = null) => {
   const congratsElement = document.getElementById('modal-body')
@@ -80,6 +120,7 @@ const sectionSix = (subject = null) => {
 const sections = {
   'section-two': sectionTwo,
   'section-three': sectionThree,
+  'section-five': sectionFive,
   'section-six': sectionSix
 };
 
