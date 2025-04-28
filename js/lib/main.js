@@ -1,18 +1,23 @@
 import Proxy from './proxy.js';
-import { arrayHasLengthOfZeroOrIsNull} from "./helpers.js";
+
 /*
   Setup initial state
-  */
-const userInput = {numberOfPlayers: 1, players:[
-    {id: 1, name: 'Player 1'}
-  ]};
+ */
+const userInput = {
+  numberOfPlayers: 1,
+  players: [
+    {
+      id: 1,
+      name: 'Player 1'
+    }
+  ]
+};
 const playerNames = [];
 const winner = {id: null};
 const symbols = ["🚹"];
 
-
 /*
-  Get key elements that will display in a reactive way
+  Select DOM elements
  */
 const number = document.querySelector('#number-of-players');
 const playersDiv = document.querySelector('#inputs');
@@ -48,14 +53,14 @@ closeModalButton.addEventListener('click', () => {
   body.classList.remove('stop-scrolling');
 });
 
-
 const sectionTwo = async (subject) => {
   Proxy.getQuestionsAndAnswers(subject)
 }
 
 const sectionThree = (subject = null) => {
-  // Detect if the current section is section three and the re-populate inputs with already entered names
-  // for consistency if the user changes the number of players.
+  /*
+    Detect if the current section is section three and the re-populate inputs with already entered names
+   */
   detectNewNameInput()
 };
 
@@ -79,7 +84,6 @@ const sectionFour = (subject = null) => {
       toggleLoadingMessageAndButton()
     }
   }, 500);
-
 }
 
 const sectionFive = (subject = null) => {
@@ -109,7 +113,6 @@ const sectionFive = (subject = null) => {
        * Create the answer inputs for the current question
        */
       const answersDiv = panel.querySelector('.answers');
-      answersDiv.innerHTML = ""; // Reset innerHTML to ensure the answers are fresh each time the question is displayed.
       answersDiv.innerHTML = userInput.players.map(player => `<input type="text" data-playerid="${player.id}" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
     }
     document.getElementById('team-questions').append(...panels);
@@ -135,13 +138,11 @@ const sectionSix = (subject = null) => {
 
   const interval = setInterval(() => {
     countdown.innerText = String(--timeLeft.seconds);
-
     if (timeLeft.seconds === 0) {
       countdown.innerText = "";
       countdown.classList.add('hide')
       clearInterval(interval)
     }
-
   },1000)
 
   setTimeout(() => {
@@ -191,14 +192,12 @@ function createPlayerSymbols() {
  */
 function detectNewNameInput() {
   for (let input of inputs) {
-    console.log(input)
     input.addEventListener('input', (e) => {
       const id = e.target.id.split('-')[1];
       userInput.players[id-1].name = e.target.value ;
       playerNames[id-1] = e.target.value;
     })
   }
-  console.log('players: ', userInput.players)
 }
 
 /*
@@ -218,16 +217,13 @@ function handleNumOfPlayersButtons(eventTarget) {
   createPlayerSymbols();
   playersDiv.innerHTML = " "; // Reset the players div to keep the input elements fresh
   createNewPlayerInputs();
-  console.log(userInput.players)
 }
-
 
 /*
   Reactively create input text boxes that are styled to match the page when the user amends the number of players.
   This also maintains any previously entered names for if or when the user changes the number of players.
  */
 function createNewPlayerInputs() {
-
   for (let i = 0; i < userInput.numberOfPlayers; i++) {
     const player = document.createElement('input');
     const num = i+1;
@@ -246,7 +242,6 @@ function createNewPlayerInputs() {
       answers: []
     }
   }
-
 }
 
 /*
@@ -264,18 +259,6 @@ function addPlayerAnswerInputsListeners() {
     input.addEventListener('input', (e) => {
       handleAnswerInput(e.target.value, Number(e.target.dataset.playerid));
     })
-  }
-}
-
-function haveQuestionsLoaded() {
-  if (Proxy.result.questions && Proxy.result.answers) {
-    buttonToShowQuestions.classList.remove('hide');
-    loadingStatement.classList.add('hide');
-    startQuizStatement.classList.remove('hide');
-  } else {
-    buttonToShowQuestions.classList.add('hide');
-    loadingStatement.classList.remove('hide');
-    startQuizStatement.classList.add('hide');
   }
 }
 
