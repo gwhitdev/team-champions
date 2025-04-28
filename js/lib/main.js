@@ -74,14 +74,19 @@ const sectionFive = (subject = null) => {
       if (i > 0) {
         panel.classList.add('hide');
       }
-      panel.id = `question-${i+1}`;
+      panel.id = `question-${i}`;
       panel.innerHTML = `
-         <div class="question-number">${i+1} ${question}</div>
+         <div class="question-number">${question}</div>
+         <div class="answers"><!--Placeholder for players' answers--></div>
           <button class="question-button" data-nextquestion="${i+1}">Next Question</button>
       `;
+      const answersDiv = panel.querySelector('.answers');
+      answersDiv.innerHTML = ""; // Reset innerHTML to ensure the answers are fresh each time the question is displayed.
+      answersDiv.innerHTML = userInput.players.map(player => `<input type="text" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
       panels.push(panel);
     }
     document.getElementById('team-questions').append(...panels);
+
   }
 
   const questionButtons = document.querySelectorAll('.question-button');
@@ -154,16 +159,18 @@ function createPlayerSymbols() {
 }
 
 /*
-  Add the inputted to an array of names to hold the state
+  Add the input to an array of names to hold the state
  */
 function detectNewNameInput() {
   for (let input of inputs) {
     console.log(input)
     input.addEventListener('input', (e) => {
       const id = e.target.id.split('-')[1];
+      userInput.players[id-1].name = e.target.value ;
       playerNames[id-1] = e.target.value;
     })
   }
+  console.log('players: ', userInput.players)
 }
 
 /*
@@ -173,8 +180,8 @@ function handleNumOfPlayersButtons(eventTarget) {
   if (eventTarget.id === "more" && userInput.numberOfPlayers < 10) {
     userInput.numberOfPlayers = ++userInput.numberOfPlayers;
     symbols.push("🚹");
-
   }
+
   if (eventTarget.id === "less" && userInput.numberOfPlayers >= 2 && userInput.numberOfPlayers <= 10) {
     userInput.numberOfPlayers = --userInput.numberOfPlayers;
     symbols.pop();
@@ -182,15 +189,17 @@ function handleNumOfPlayersButtons(eventTarget) {
 
   createPlayerSymbols();
   playersDiv.innerHTML = " "; // Reset the players div to keep the input elements fresh
-  createNewPlayerInputs()
-
+  createNewPlayerInputs();
+  console.log(userInput.players)
 }
+
 
 /*
   Reactively create input text boxes that are styled to match the page when the user amends the number of players.
   This also maintains any previously entered names for if or when the user changes the number of players.
  */
 function createNewPlayerInputs() {
+
   for (let i = 0; i < userInput.numberOfPlayers; i++) {
     const player = document.createElement('input');
     const num = i+1;
@@ -203,7 +212,12 @@ function createNewPlayerInputs() {
       player.value = playerNames[i]; // Ensure player name input keeps last entered name if number of players changes
     }
     playersDiv.appendChild(player);
+    userInput.players[i] = {
+      id: num,
+      name: player.placeholder
+    }
   }
+
 }
 
 /*
