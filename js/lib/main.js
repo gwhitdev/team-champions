@@ -81,6 +81,9 @@ const sectionFive = (subject = null) => {
       `;
       panels.push(panel);
 
+      /**
+       * Create the answer inputs for the current question
+       */
       const answersDiv = panel.querySelector('.answers');
       answersDiv.innerHTML = ""; // Reset innerHTML to ensure the answers are fresh each time the question is displayed.
       answersDiv.innerHTML = userInput.players.map(player => `<input type="text" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
