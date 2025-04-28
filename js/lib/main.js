@@ -218,7 +218,7 @@ function createNewPlayerInputs() {
     userInput.players[i] = {
       id: num,
       name: player.placeholder,
-      answer: null
+      answers: []
     }
   }
 
@@ -229,7 +229,7 @@ function createNewPlayerInputs() {
  */
 function handleAnswerInput(answerValue, playerId){
   const foundUser = userInput.players[playerId-1];
-  foundUser.answer = answerValue;
+  foundUser.answers.push(answerValue);
 }
 
 function addPlayerAnswerInputsListeners() {
