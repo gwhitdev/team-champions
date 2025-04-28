@@ -68,22 +68,22 @@ const sectionFive = (subject = null) => {
     // Create question panels and hide them apart from the first
     for (let i = 0; i < questions.length; i++) {
       const question = questions[i];
-      const answer = answers[i];
       const panel = document.createElement('div');
       panel.classList.add('question-panel');
       if (i > 0) {
         panel.classList.add('hide');
       }
-      panel.id = `question-${i}`;
+      panel.id = `question-${i+1}`;
       panel.innerHTML = `
          <div class="question-number">${question}</div>
          <div class="answers"><!--Placeholder for players' answers--></div>
           <button class="question-button" data-nextquestion="${i+1}">Next Question</button>
       `;
+      panels.push(panel);
+
       const answersDiv = panel.querySelector('.answers');
       answersDiv.innerHTML = ""; // Reset innerHTML to ensure the answers are fresh each time the question is displayed.
       answersDiv.innerHTML = userInput.players.map(player => `<input type="text" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
-      panels.push(panel);
     }
     document.getElementById('team-questions').append(...panels);
 
