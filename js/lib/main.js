@@ -234,7 +234,6 @@ function handleAnswerInput(answerValue, playerId){
 
 function addPlayerAnswerInputsListeners() {
   const playerAnswerInputs = document.getElementsByClassName('answer-input'); // Select all player answer inputs.
-  console.log('Inputs: ', playerAnswerInputs)
   for (let input of playerAnswerInputs) {
     console.log('adding event listener to player answer input')
     input.addEventListener('input', (e) => {
