@@ -10,6 +10,7 @@ const playerNames = [];
 const winner = {id: null};
 const symbols = ["🚹"];
 
+
 /*
   Get key elements that will display in a reactive way
  */
@@ -25,6 +26,9 @@ const closeModalButton = document.getElementById('close-modal');
 const openNavButton = document.getElementById('open-nav');
 const nav = document.getElementsByTagName('nav')[0];
 const closeNavButton = document.getElementById('close-nav');
+const buttonToShowQuestions = document.getElementById('section-five-button');
+const loadingStatement = document.getElementById('loading-statement');
+const startQuizStatement = document.getElementById('start-quiz-statement');
 
 closeNavButton.addEventListener('click', () => {
   nav.classList.add('hide');
@@ -55,14 +59,34 @@ const sectionThree = (subject = null) => {
   detectNewNameInput()
 };
 
+const state = {loading: true};
+function checkLoading() {
+  if (Proxy.result.questions && Proxy.result.answers) state.loading = false;
+}
+
+const sectionFour = (subject = null) => {
+  function toggleLoadingMessageAndButton() {
+    buttonToShowQuestions.classList.remove('hide');
+    loadingStatement.classList.add('hide');
+    startQuizStatement.classList.remove('hide');
+  }
+
+  const timer = setInterval(() => {
+    checkLoading();
+    console.log('loading: ', state.loading)
+    if (!state.loading) {
+      clearInterval(timer);
+      toggleLoadingMessageAndButton()
+    }
+  }, 500);
+
+}
+
 const sectionFive = (subject = null) => {
   const questions = Proxy.result.questions;
   const answers = Proxy.result.answers;
-  console.log("Qs & As: ", Proxy.result);
 
-  if (arrayHasLengthOfZeroOrIsNull(questions) || arrayHasLengthOfZeroOrIsNull(answers)) {
-    alert("There was an error loading the questions and answers. Please try again later.");
-  } else {
+  if (! state.loading) {
     const panels = [];
 
     // Create question panels and hide them apart from the first
@@ -128,6 +152,7 @@ const sectionSix = (subject = null) => {
 const sections = {
   'section-two': sectionTwo,
   'section-three': sectionThree,
+  'section-four': sectionFour,
   'section-five': sectionFive,
   'section-six': sectionSix
 };
@@ -239,6 +264,18 @@ function addPlayerAnswerInputsListeners() {
     input.addEventListener('input', (e) => {
       handleAnswerInput(e.target.value, Number(e.target.dataset.playerid));
     })
+  }
+}
+
+function haveQuestionsLoaded() {
+  if (Proxy.result.questions && Proxy.result.answers) {
+    buttonToShowQuestions.classList.remove('hide');
+    loadingStatement.classList.add('hide');
+    startQuizStatement.classList.remove('hide');
+  } else {
+    buttonToShowQuestions.classList.add('hide');
+    loadingStatement.classList.remove('hide');
+    startQuizStatement.classList.add('hide');
   }
 }
 
