@@ -81,15 +81,15 @@ const sectionFive = (subject = null) => {
       `;
       panels.push(panel);
 
-      /**
+      /*
        * Create the answer inputs for the current question
        */
       const answersDiv = panel.querySelector('.answers');
       answersDiv.innerHTML = ""; // Reset innerHTML to ensure the answers are fresh each time the question is displayed.
-      answersDiv.innerHTML = userInput.players.map(player => `<input type="text" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
+      answersDiv.innerHTML = userInput.players.map(player => `<input type="text" data-playerid="${player.id}" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
     }
     document.getElementById('team-questions').append(...panels);
-
+    addPlayerAnswerInputsListeners(); // Set event listeners for the player answer inputs.
   }
 
   const questionButtons = document.querySelectorAll('.question-button');
@@ -217,10 +217,30 @@ function createNewPlayerInputs() {
     playersDiv.appendChild(player);
     userInput.players[i] = {
       id: num,
-      name: player.placeholder
+      name: player.placeholder,
+      answer: null
     }
   }
 
+}
+
+/*
+  Reactively update the state of the answers for each player when the user enters an answer.
+ */
+function handleAnswerInput(answerValue, playerId){
+  const foundUser = userInput.players[playerId-1];
+  foundUser.answer = answerValue;
+}
+
+function addPlayerAnswerInputsListeners() {
+  const playerAnswerInputs = document.getElementsByClassName('answer-input'); // Select all player answer inputs.
+  console.log('Inputs: ', playerAnswerInputs)
+  for (let input of playerAnswerInputs) {
+    console.log('adding event listener to player answer input')
+    input.addEventListener('input', (e) => {
+      handleAnswerInput(e.target.value, Number(e.target.dataset.playerid));
+    })
+  }
 }
 
 /*
