@@ -78,7 +78,6 @@ const sectionFour = (subject = null) => {
 
   const timer = setInterval(() => {
     checkLoading();
-    console.log('loading: ', state.loading)
     if (!state.loading) {
       clearInterval(timer);
       toggleLoadingMessageAndButton()
@@ -113,7 +112,7 @@ const sectionFive = (subject = null) => {
        * Create the answer inputs for the current question
        */
       const answersDiv = panel.querySelector('.answers');
-      answersDiv.innerHTML = userInput.players.map(player => `<input type="text" data-playerid="${player.id}" id="question${i}-player${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
+      answersDiv.innerHTML = userInput.players.map(player => `<input type="text" data-playerid="${player.id}" id="question-${i}-player-${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
     }
     document.getElementById('team-questions').append(...panels);
     addPlayerAnswerInputsListeners(); // Set event listeners for the player answer inputs.
@@ -130,6 +129,7 @@ const sectionFive = (subject = null) => {
 }
 
 const sectionSix = (subject = null) => {
+  markAnswers();
   const congratsElement = document.getElementById('modal-body')
   modal.classList.add('show');
   body.classList.add('stop-scrolling');
@@ -150,12 +150,33 @@ const sectionSix = (subject = null) => {
   },4000)
 };
 
+function jaccardSimilarity(questionIndex, setA) {
+  const setB = new Set(Proxy.result.answers[questionIndex].toLowerCase());
+  const intersection = new Set([...setA].filter(x => setB.has(x)));
+  const union = new Set([...setA, ...setB]);
+  console.log(intersection.size / union.size);
+  return intersection.size / union.size;
+}
+
+
+const markAnswers = () => {
+  userInput.players.map(player => {
+    player.answers.forEach((answer,index) => {
+      if (jaccardSimilarity(index, new Set(answer.answerValue.toLowerCase())) >= 1) {
+        player.answers[index].answerCorrect = true;
+        player.score++;
+      }
+    })
+  })
+  console.log(userInput.players);
+}
+
 const sections = {
   'section-two': sectionTwo,
   'section-three': sectionThree,
   'section-four': sectionFour,
   'section-five': sectionFive,
-  'section-six': sectionSix
+  'section-six': sectionSix,
 };
 
 sectionButtons.forEach(button => {
@@ -239,7 +260,8 @@ function createNewPlayerInputs() {
     userInput.players[i] = {
       id: num,
       name: player.placeholder,
-      answers: []
+      answers: [],
+      score: 0
     }
   }
 }
@@ -247,20 +269,29 @@ function createNewPlayerInputs() {
 /*
   Reactively update the state of the answers for each player when the user enters an answer.
  */
-function handleAnswerInput(answerValue, playerId){
+function handleAnswerInput(answerInput, playerId){
   const foundUser = userInput.players[playerId-1];
-  foundUser.answers.push(answerValue);
+  if (foundUser.answers.length > 0) {
+    foundUser.answers[answerInput.id.split('-')[1]].answerValue = answerInput.value;
+  } else {
+    foundUser.answers.push({
+      answerValue: answerInput.value,
+      answerCorrect: null
+    });
+  }
+
 }
 
 function addPlayerAnswerInputsListeners() {
   const playerAnswerInputs = document.getElementsByClassName('answer-input'); // Select all player answer inputs.
   for (let input of playerAnswerInputs) {
-    console.log('adding event listener to player answer input')
     input.addEventListener('input', (e) => {
-      handleAnswerInput(e.target.value, Number(e.target.dataset.playerid));
+      handleAnswerInput(e.target, Number(e.target.dataset.playerid));
     })
   }
 }
+
+
 
 /*
   When the user changes the number of players the number of player symbols needs to change.
