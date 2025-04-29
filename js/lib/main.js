@@ -1,4 +1,21 @@
 import Proxy from './proxy.js';
+import {
+  body,
+  nav,
+  inputs,
+  playersDiv,
+  symbolsDiv,
+  number,
+  modal,
+  playerButtons,
+  closeNavButton,
+  closeModalButton,
+  sectionButtons,
+  startQuizStatement,
+  buttonToShowQuestions,
+  loadingStatement,
+  openNavButton,
+} from './domElementsRegister';
 
 /*
   Setup initial state
@@ -15,25 +32,6 @@ const userInput = {
 const playerNames = [];
 const winner = {id: null};
 const symbols = ["🚹"];
-
-/*
-  Select DOM elements
- */
-const number = document.querySelector('#number-of-players');
-const playersDiv = document.querySelector('#inputs');
-const symbolsDiv = document.getElementById('symbols');
-const inputs = document.getElementsByClassName('inputs');
-const playerButtons = document.getElementsByClassName('numOfPlayersButtons');
-const sectionButtons = document.querySelectorAll('.next-section-button');
-const modal = document.getElementById('modal');
-const body = document.getElementsByTagName('body')[0];
-const closeModalButton = document.getElementById('close-modal');
-const openNavButton = document.getElementById('open-nav');
-const nav = document.getElementsByTagName('nav')[0];
-const closeNavButton = document.getElementById('close-nav');
-const buttonToShowQuestions = document.getElementById('section-five-button');
-const loadingStatement = document.getElementById('loading-statement');
-const startQuizStatement = document.getElementById('start-quiz-statement');
 
 closeNavButton.addEventListener('click', () => {
   nav.classList.add('hide');
@@ -85,9 +83,8 @@ const sectionFour = (subject = null) => {
   }, 500);
 }
 
-const sectionFive = (subject = null) => {
-  const questions = Proxy.result.questions;
-  const answers = Proxy.result.answers;
+const sectionFive = async (subject = null) => {
+  const questions = await Proxy.result.questions;
 
   if (! state.loading) {
     const panels = [];
@@ -130,6 +127,7 @@ const sectionFive = (subject = null) => {
 
 const sectionSix = (subject = null) => {
   markAnswers();
+  createLeaderBoard();
   const congratsElement = document.getElementById('modal-body')
   modal.classList.add('show');
   body.classList.add('stop-scrolling');
@@ -279,7 +277,6 @@ function handleAnswerInput(answerInput, playerId){
       answerCorrect: null
     });
   }
-
 }
 
 function addPlayerAnswerInputsListeners() {
@@ -291,8 +288,23 @@ function addPlayerAnswerInputsListeners() {
   }
 }
 
-
-
+function createLeaderBoard() {
+  const scores = [];
+  userInput.players.forEach(player => {
+    scores.push({
+      playerId: player.name,
+      score: player.score
+    });
+  })
+  scores.sort((a,b) => b.score - a.score);
+  const board = document.createElement('ul');
+  scores.forEach((score, index) => {
+    const li = document.createElement('li');
+    li.innerText = `${index+1}. ${score.playerId} - ${score.score}`;
+    board.appendChild(li);
+  })
+  document.getElementById('leaderboard').appendChild(board);
+}
 /*
   When the user changes the number of players the number of player symbols needs to change.
   This handles the change of state and prints it to the page.

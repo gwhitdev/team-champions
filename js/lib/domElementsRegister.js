@@ -1,0 +1,15 @@
+export const number = document.querySelector('#number-of-players');
+export const playersDiv = document.querySelector('#inputs');
+export const symbolsDiv = document.getElementById('symbols');
+export const inputs = document.getElementsByClassName('inputs');
+export const playerButtons = document.getElementsByClassName('numOfPlayersButtons');
+export const sectionButtons = document.querySelectorAll('.next-section-button');
+export const modal = document.getElementById('modal');
+export const body = document.getElementsByTagName('body')[0];
+export const closeModalButton = document.getElementById('close-modal');
+export const openNavButton = document.getElementById('open-nav');
+export const nav = document.getElementsByTagName('nav')[0];
+export const closeNavButton = document.getElementById('close-nav');
+export const buttonToShowQuestions = document.getElementById('section-five-button');
+export const loadingStatement = document.getElementById('loading-statement');
+export const startQuizStatement = document.getElementById('start-quiz-statement');
