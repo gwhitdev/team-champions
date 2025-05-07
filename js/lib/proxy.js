@@ -14,7 +14,6 @@ const Proxy = {
       })
       .then(() => console.info('Questions received...'))
       .catch(error => {
-        console.log(error)
         this.result.error = error;
         this.loading.state = false;
       })
