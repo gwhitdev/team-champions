@@ -39,7 +39,6 @@ export const setupElements = (elementsNameArray) => {
   }
 }
 
-
 export const getRegisteredElements = (elementName) => {
   if (! register[elementName]) {
     throw Error(`Element ${elementName} not registered`);
