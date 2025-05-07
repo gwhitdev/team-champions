@@ -1,5 +1,4 @@
 import { userInput } from "./state.js";
-import { jacquardSimilarity } from "./helpers.js";
 
 export const markAnswers = () => {
   userInput.players.map(player => {
@@ -10,4 +9,14 @@ export const markAnswers = () => {
       }
     })
   })
+}
+
+/*
+  Logic to calculate the Jacquard similarity between the user's answer and the correct answer
+ */
+const jacquardSimilarity = (questionIndex, setA) => {
+  const setB = new Set(Proxy.result.answers[questionIndex].toLowerCase());
+  const intersection = new Set([...setA].filter(x => setB.has(x)));
+  const union = new Set([...setA, ...setB]);
+  return intersection.size / union.size;
 }

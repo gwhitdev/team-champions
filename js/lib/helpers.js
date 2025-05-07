@@ -11,14 +11,6 @@ export const toggleLoadingMessageAndButton = () => {
   element('start-quiz-statement').classList.remove('hide');
 }
 
-/*
-  Logic to calculate the Jacquard similarity between the user's answer and the correct answer
- */
-export const jacquardSimilarity = (questionIndex, setA) => {
-  const setB = new Set(Proxy.result.answers[questionIndex].toLowerCase());
-  const intersection = new Set([...setA].filter(x => setB.has(x)));
-  const union = new Set([...setA, ...setB]);
-  return intersection.size / union.size;
-}
+
 
 export const checkLoading = () => (Proxy.result.questions && Proxy.result.answers) ? loading.state = false : "";

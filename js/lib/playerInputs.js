@@ -65,7 +65,6 @@ export const createNewPlayerInputs = () => {
  */
 function handleAnswerInput(answerInput, playerId){
   const foundUser = userInput.players[playerId-1];
-  console.log('foundUser: ',foundUser);
   if (foundUser.answers[answerInput.id.split('-')[1]]) {
     foundUser.answers[answerInput.id.split('-')[1]].answerValue = answerInput.value;
   } else {
