@@ -6,6 +6,9 @@ Create the leader board
 export const createLeaderBoard = () => {
   const scores = [];
 
+  /*
+  * Create an array of objects containing the player's name and score.'
+   */
   userInput.players.forEach(player => {
     scores.push({
       playerId: player.name,
@@ -15,7 +18,7 @@ export const createLeaderBoard = () => {
 
   scores.sort((a,b) => b.score - a.score); // Sort the scores in descending order
 
-  const board = document.createElement('ul');
+  const board = document.createElement('ul'); // Create the leader board
 
   /* Create the list items for the leader board */
   scores.forEach((score, index) => {

@@ -5,8 +5,17 @@ import { getRegisteredElements as element } from "./domElementsRegister.js";
 import { createLeaderBoard } from "./leaderBoard.js";
 import { addPlayerAnswerInputsListeners, detectNewNameInput } from './playerInputs.js';
 import { markAnswers } from './answers.js';
+import {validateUserInput} from "./inputValidation.js";
+import Errors from "./errors.js";
 
-export const sectionTwo = async (subject) => ApiProxy.getQuestionsAndAnswers(subject);
+export const sectionTwo = async (subject) => {
+  try {
+    validateUserInput(subject, 'section-two');
+    await ApiProxy.getQuestionsAndAnswers(subject);
+  } catch (error) {
+    Errors.add(error);
+  }
+}
 export const sectionThree = (subject = null) => detectNewNameInput(); // Detect if the current section is section three and the re-populate inputs with already entered names
 
 export const sectionFour = (subject = null) => {
@@ -85,9 +94,7 @@ export const sectionSix = (subject = null) => {
   },4000)
 };
 
-
 const sectionSeven = (subject = null) => {
-  console.log(ApiProxy.result)
   if (! ApiProxy.result.answers || ! ApiProxy.result) alert('Something went wrong. Please refresh the quiz and try again.');
   const listOfAnswers = ApiProxy.result.answers;
   const listsOfPlayersAnswers = [];

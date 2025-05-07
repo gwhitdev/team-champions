@@ -2,6 +2,7 @@
   Base initial state
  */
 export const userInput = {
+  errors: [],
   numberOfPlayers: 1,
   players: [
     {

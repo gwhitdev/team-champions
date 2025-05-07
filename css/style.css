@@ -4,6 +4,10 @@
 
 /* GLOBALS */
 
+html {
+  overflow: hidden;
+}
+
 h2 {
   font-size: 5rem;
 }
@@ -19,7 +23,6 @@ h2 {
   overflow: hidden;
 }
 
-
 button {
   color: var(--white)!important;
   width: 100%;
@@ -32,13 +35,6 @@ button {
 
 /* THE REST */
 
-
-html {
-  scroll-behavior: smooth;
-  scrollbar-width: 2rem;
-  scrollbar-color: var(--deepPink) var(--deepBlue);
-  overflow: hidden;
-}
 html::-webkit-scrollbar {
   width: 12px;
 }
@@ -63,11 +59,7 @@ nav {
   flex-direction: column;
   z-index: 100;
   overflow: auto;
-
-
 }
-
-
 
 nav::-webkit-scrollbar-track {
   background: var(--deepBlue);
@@ -401,6 +393,16 @@ button:hover {
   padding: 0 2rem;
   margin-top: 3rem;
   font-weight: bold;
+}
+
+#errors-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: var(--deepPink);
+  color: var(--deepBlue);
 }
 
 

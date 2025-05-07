@@ -1,6 +1,9 @@
 import { setupElements, getRegisteredElements as element } from "./domElementsRegister.js";
 import { createNewPlayerInputs, handleNumOfPlayersButtons } from "./playerInputs.js";
 import sections from "./sectionActions.js";
+import { userInput } from "./state.js";
+import {validateUserInput} from "./inputValidation.js";
+import Errors from "./errors.js";
 
 setupElements([
   'body',
@@ -44,15 +47,17 @@ element('close-modal-button').addEventListener('click', () => {
 for (let button of element('next-section-button')) {
   button.addEventListener('click', (e) => {
     const nextSection = e.target.dataset.next;
-    const subject = { subject: '' }
+    try {
+      validateUserInput(element('subject-input').value, nextSection);
+      const subject = element('subject-input').value
+      if (Object.keys(sections).includes(nextSection)) sections[nextSection](subject);
 
-    if (nextSection === 'section-two') subject.subject = element('subject-input').value;
-    if (Object.keys(sections).includes(nextSection)) sections[nextSection](subject.subject);
-
-    document.getElementById(nextSection).classList.remove('hide');
-    document.getElementById(nextSection).classList.add('show');
-
-    window.location = `#${nextSection}`; // Move the user to the next section as defined above
+      document.getElementById(nextSection).classList.remove('hide');
+      document.getElementById(nextSection).classList.add('show');
+      window.location = `#${nextSection}`;
+    } catch (error) {
+      Errors.showModal(error)
+    }
   })
 }
 

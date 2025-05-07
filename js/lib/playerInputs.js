@@ -1,7 +1,10 @@
 import { userInput, playerNames, symbols } from "./state.js";
 import { getRegisteredElements as element } from "./domElementsRegister.js";
 import { createPlayerSymbols } from "./playerSymbols.js";
+import { validateUserInput } from "./inputValidation.js";
+import Errors from "./errors.js";
 
+const errorsModal = document.getElementById('errors-modal');
 /*
   Add the input to an array of names to hold the state
  */
@@ -9,7 +12,7 @@ export const detectNewNameInput = () => {
   for (let input of element('name-inputs')) {
     input.addEventListener('input', (e) => {
       const id = e.target.id.split('-')[1];
-      userInput.players[id-1].name = e.target.value ;
+        userInput.players[id-1].name = e.target.value;
     })
   }
 }
@@ -31,7 +34,6 @@ export const handleNumOfPlayersButtons = (eventTarget) => {
   createPlayerSymbols();
   element('inputs').innerHTML = " "; // Reset the player name inputs to stop duplication
   createNewPlayerInputs();
-  console.log('after: ', userInput.players)
 }
 
 /*
@@ -66,7 +68,13 @@ export const createNewPlayerInputs = () => {
 function handleAnswerInput(answerInput, playerId){
   const foundUser = userInput.players[playerId-1];
   if (foundUser.answers[answerInput.id.split('-')[1]]) {
-    foundUser.answers[answerInput.id.split('-')[1]].answerValue = answerInput.value;
+    try {
+      validateUserInput(answerInput.value, 'section-three');
+      foundUser.answers[answerInput.id.split('-')[1]].answerValue = answerInput.value;
+
+    } catch (error) {
+      Errors.showModal(error);
+    }
   } else {
     foundUser.answers.push({
       answerValue: answerInput.value,
@@ -78,8 +86,14 @@ function handleAnswerInput(answerInput, playerId){
 export const addPlayerAnswerInputsListeners = () => {
   const playerAnswerInputs = document.getElementsByClassName('answer-input'); // Select all player answer inputs.
   for (let input of playerAnswerInputs) {
-    input.addEventListener('input', (e) => {
-      handleAnswerInput(e.target, Number(e.target.dataset.playerid));
-    })
+    try {
+      validateUserInput(input.value, 'section-five');
+
+      input.addEventListener('input', (e) => {
+        handleAnswerInput(e.target, Number(e.target.dataset.playerid));
+      })
+    } catch (error) {
+      Errors.showModal(error);
+    }
   }
 }
