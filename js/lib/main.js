@@ -23,7 +23,6 @@ setupElements([
   '#subject-input',
 ]);
 
-console.log(element('close-nav-button'));
 element('close-nav-button').addEventListener('click', () => {
   element('nav').classList.add('hide');
   element('nav').classList.remove('show-nav');

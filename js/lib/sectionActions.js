@@ -84,12 +84,19 @@ export const sectionSix = (subject = null) => {
   },4000)
 };
 
+
+const sectionSeven = (subject = null) => {
+  const correctAnswers = await Proxy.result.answers;
+  // Get list of users' answers
+}
+
 const sections = {
   'section-two': sectionTwo,
   'section-three': sectionThree,
   'section-four': sectionFour,
   'section-five': sectionFive,
   'section-six': sectionSix,
+  'section-seven': sectionSeven,
 };
 
 export default sections;

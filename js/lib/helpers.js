@@ -11,6 +11,4 @@ export const toggleLoadingMessageAndButton = () => {
   element('start-quiz-statement').classList.remove('hide');
 }
 
-
-
 export const checkLoading = () => (Proxy.result.questions && Proxy.result.answers) ? loading.state = false : "";

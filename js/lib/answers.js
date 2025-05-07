@@ -1,5 +1,8 @@
 import { userInput } from "./state.js";
 
+/*
+  Logic to mark the correct answers for each player
+ */
 export const markAnswers = () => {
   userInput.players.map(player => {
     player.answers.forEach((answer,index) => {
