@@ -368,9 +368,16 @@ button:hover {
 #leaderboard {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  height: 70%;
-  overflow: auto;
+  margin-bottom: 3rem;
+}
+#leaderboard li {
+  font-size: 3rem;
+  line-height: 4rem;
+  margin: 0 2rem;
+}
+
+#leaderboard li::marker {
+  color: var(--deepPink);
 }
 
 /** BREAK POINTS **/
