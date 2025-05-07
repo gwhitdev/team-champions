@@ -1,41 +1,53 @@
-import {
-  body,
-  nav,
-  modal,
-  playerButtons,
-  closeNavButton,
-  closeModalButton,
-  sectionButtons,
-  openNavButton,
-} from './domElementsRegister.js';
+import { setupElements, getRegisteredElements as element } from "./domElementsRegister.js";
 import { createNewPlayerInputs, handleNumOfPlayersButtons } from "./helpers.js";
+import sections from "./sectionActions.js";
 
-closeNavButton.addEventListener('click', () => {
-  nav.classList.add('hide');
-  nav.classList.remove('show-nav');
-  body.classList.remove('stop-scrolling');
+setupElements([
+  'body',
+  'nav',
+  '#modal',
+  '.numOfPlayersButtons',
+  '#close-nav-button',
+  '#close-modal-button',
+  '.next-section-button',
+  '#open-nav-button',
+  '#players-div',
+  '#symbols',
+  '#section-five-button',
+  '#loading-statement',
+  '#start-quiz-statement',
+  '#inputs',
+  '.name-inputs',
+  '#number-of-players-1',
+  '.number-of-players-buttons',
+  '#subject-input',
+]);
+
+console.log(element('close-nav-button'));
+element('close-nav-button').addEventListener('click', () => {
+  element('nav').classList.add('hide');
+  element('nav').classList.remove('show-nav');
+  element('body').classList.remove('stop-scrolling');
 });
 
-openNavButton.addEventListener('click', () => {
-  nav.classList.remove('hide');
-  nav.classList.add('show-nav');
-  body.classList.add('stop-scrolling');
-})
-
-closeModalButton.addEventListener('click', () => {
-  modal.classList.add('hide');
-  modal.classList.remove('show');
-  body.classList.remove('stop-scrolling');
+element('open-nav-button').addEventListener('click', () => {
+  element('nav').classList.remove('hide');
+  element('nav').classList.add('show-nav');
+  element('body').classList.add('stop-scrolling');
 });
 
-sectionButtons.forEach(button => {
-  import sections from "./sectionActions.js";
+element('close-modal-button').addEventListener('click', () => {
+  element('modal').classList.add('hide');
+  element('modal').classList.remove('show');
+  element('body').classList.remove('stop-scrolling');
+});
 
+for (let button of element('next-section-button')) {
   button.addEventListener('click', (e) => {
     const nextSection = e.target.dataset.next;
-    const subject = {subject: ''}
+    const subject = { subject: '' }
 
-    if (nextSection === 'section-two') subject.subject = document.getElementById('subject-input').value;
+    if (nextSection === 'section-two') subject.subject = element('subject-input').value;
     if (Object.keys(sections).includes(nextSection)) sections[nextSection](subject.subject);
 
     document.getElementById(nextSection).classList.remove('hide');
@@ -43,13 +55,15 @@ sectionButtons.forEach(button => {
 
     window.location = `#${nextSection}`; // Move the user to the next section as defined above
   })
-});
+}
 
 /*
   When the user changes the number of players the number of player symbols needs to change.
   This handles the change of state and prints it to the page.
  */
-for (let button of playerButtons) button.addEventListener('click', e => handleNumOfPlayersButtons(e.target));
+for (let button of element('number-of-players-buttons')) {
+  button.addEventListener('click', e => handleNumOfPlayersButtons(e.target));
+}
 
 /*
   When the DOM has finished loading automatically create the first player name input.

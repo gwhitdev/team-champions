@@ -1,7 +1,7 @@
 import Proxy from "./proxy.js";
 import { loading, userInput } from "./state.js";
 import { toggleLoadingMessageAndButton, markAnswers, createLeaderBoard, addPlayerAnswerInputsListeners, detectNewNameInput, checkLoading } from "./helpers.js";
-import {body, modal} from "./domElementsRegister.js";
+import { getRegisteredElements as element } from "./domElementsRegister.js";
 
 export const sectionTwo = async (subject) => Proxy.getQuestionsAndAnswers(subject);
 export const sectionThree = (subject = null) => detectNewNameInput(); // Detect if the current section is section three and the re-populate inputs with already entered names
@@ -62,8 +62,8 @@ export const sectionSix = (subject = null) => {
   markAnswers();
   createLeaderBoard();
   const congratsElement = document.getElementById('modal-body')
-  modal.classList.add('show');
-  body.classList.add('stop-scrolling');
+  element('modal').classList.add('show');
+  element('body').classList.add('stop-scrolling');
   const timeLeft = {seconds: 4};
   const countdown = document.getElementById('countdown');
 

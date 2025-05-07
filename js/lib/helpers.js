@@ -1,18 +1,18 @@
-import { buttonToShowQuestions, loadingStatement, startQuizStatement, inputs, symbolsDiv, playersDiv } from "./domElementsRegister.js";
-import { loading, userInput, symbols, playerNames } from "./state.js";
+import {loading, userInput, symbols, playerNames, userInput as userINPUT} from "./state.js";
 import Proxy from "./proxy.js";
+import { getRegisteredElements as element } from "./domElementsRegister.js";
 
 export const toggleLoadingMessageAndButton = () => {
-  buttonToShowQuestions.classList.remove('hide');
-  loadingStatement.classList.add('hide');
-  startQuizStatement.classList.remove('hide');
+  element('section-five-button').classList.remove('hide');
+  element('loading-statement').classList.add('hide');
+  element('start-quiz-statement').classList.remove('hide');
 }
 
 /*
   Add the input to an array of names to hold the state
  */
 export const detectNewNameInput = () => {
-  for (let input of inputs) {
+  for (let input of element('name-inputs')) {
     input.addEventListener('input', (e) => {
       const id = e.target.id.split('-')[1];
       userInput.players[id-1].name = e.target.value ;
@@ -45,7 +45,7 @@ export const checkLoading = () => (Proxy.result.questions && Proxy.result.answer
  */
 export const createPlayerSymbols = () => {
   if (symbols.length >= 1 && symbols.length <= 10) {
-    symbolsDiv.innerHTML = symbols.join('');
+    element('symbols').innerHTML = symbols.join('');
   }
 }
 
@@ -62,10 +62,11 @@ export const handleNumOfPlayersButtons = (eventTarget) => {
     userInput.numberOfPlayers = --userInput.numberOfPlayers;
     symbols.pop();
   }
-
+  userInput.players = userInput.players.slice(0, userInput.numberOfPlayers);
   createPlayerSymbols();
-  playersDiv.innerHTML = " "; // Reset the players div to keep the input elements fresh
+  element('inputs').innerHTML = " "; // Reset the player name inputs to stop duplication
   createNewPlayerInputs();
+  console.log('after: ', userInput.players)
 }
 
 /*
@@ -79,12 +80,12 @@ export const createNewPlayerInputs = () => {
     player.id = `player-${num}`;
     player.placeholder = `Player ${num}'s name`;
     player.classList.add('workbench');
-    player.classList.add('inputs');
+    player.classList.add('name-inputs');
     player.dataset.id = `${num}`;
     if (playerNames[i]) {
       player.value = playerNames[i]; // Ensure player name input keeps last entered name if number of players changes
     }
-    playersDiv.appendChild(player);
+    element('inputs').appendChild(player);
     userInput.players[i] = {
       id: num,
       name: player.placeholder,
