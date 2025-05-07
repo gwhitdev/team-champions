@@ -37,6 +37,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: 2rem;
   scrollbar-color: var(--deepPink) var(--deepBlue);
+  overflow: hidden;
 }
 html::-webkit-scrollbar {
   width: 12px;
@@ -266,10 +267,11 @@ button:hover {
 .section-content {
   width: 60%;
   margin: 0 auto;
-  line-height: 8rem;
   height: 100vh;
   color: var(--white);
+  line-height: 8rem;
 }
+
 #number-of-players {
   font-size: 4rem;
 }
@@ -334,9 +336,45 @@ button:hover {
 #section-seven {
   flex-direction: column;
   margin-bottom: 5rem;
+  min-height: 100vh;
+  overflow: scroll;
 }
 
+#section-seven ol, #section-seven ul {
+  line-height: 2rem;
+}
 
+#section-seven li {
+  list-style: none;
+}
+
+#leaderboard {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+#leaderboard li {
+  font-size: 3rem;
+  line-height: 4rem;
+  margin: 0 2rem;
+  list-style: none;
+}
+
+.question-number-marker {
+  color: var(--deepPink);
+}
+
+.score {
+  color: var(--deepPink);
+}
+
+.correct-answer {
+  color: var(--deepGreen);
+}
+
+.incorrect-answer {
+  color: var(--deepRed);
+}
 
 #modal {
   background-color: var(--deepBlue);
@@ -365,20 +403,7 @@ button:hover {
   font-weight: bold;
 }
 
-#leaderboard {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3rem;
-}
-#leaderboard li {
-  font-size: 3rem;
-  line-height: 4rem;
-  margin: 0 2rem;
-}
 
-#leaderboard li::marker {
-  color: var(--deepPink);
-}
 
 /** BREAK POINTS **/
 

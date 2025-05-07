@@ -20,7 +20,7 @@ export const createLeaderBoard = () => {
   /* Create the list items for the leader board */
   scores.forEach((score, index) => {
     const li = document.createElement('li');
-    li.innerText = `${index+1}. ${score.playerId} - ${score.score}`;
+    li.innerHTML = `<span class="question-number-marker">${index+1}.</span> ${score.playerId} - <span class="score">Score: ${score.score}</span>`;
     board.appendChild(li);
   })
 

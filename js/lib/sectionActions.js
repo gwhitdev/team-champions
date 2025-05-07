@@ -92,7 +92,7 @@ const sectionSeven = (subject = null) => {
   const listOfAnswers = ApiProxy.result.answers;
   const listsOfPlayersAnswers = [];
   userInput.players.forEach(player => {
-   listsOfPlayersAnswers.push(`<h2>${player.name}</h2><ul id="${player.id}-answers-list"></ul>`);
+   listsOfPlayersAnswers.push(`<h3>${player.name}</h3><ul id="${player.id}-answers-list"></ul>`);
   });
 
   const answersDiv = document.getElementById('answers');
@@ -101,7 +101,7 @@ const sectionSeven = (subject = null) => {
   userInput.players.forEach((player, index) => {
     player.answers.forEach((answer, index) => {
       document.getElementById(`${player.id}-answers-list`).innerHTML +=
-      `<li>Question #${index +1}: Player answer: ${answer.answerValue} | Correct answer: ${listOfAnswers[index]}</li>`;
+        `<li>Question #${index +1}: <ul><li><b>Player answer:</b> ${answer.answerValue} ${answer.answerCorrect ? '<span class="correct-answer">CORRECT</span>' : '<span class="incorrect-answer">INCORRECT</a>'}</li><li><b>Correct answer:</b> ${listOfAnswers[index]}</li></ul></li>`;
     })
   })
 }

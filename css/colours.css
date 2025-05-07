@@ -5,4 +5,6 @@
   --deeperPink: rgb(237,0,250);
   --white: rgb(255,255,255);
   --sectionBackground: var(--deepBlue);
+  --deepGreen: rgb(0,255,0);
+  --deepRed: rgb(255,0,0);
 }
