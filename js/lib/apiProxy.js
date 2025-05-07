@@ -1,4 +1,4 @@
-const Proxy = {
+const ApiProxy = {
   baseUrl: "champions-proxy-api-f96177dcdfbf.herokuapp.com",
   options: {
     method: "GET"
@@ -20,6 +20,6 @@ const Proxy = {
   }
 }
 
-export default Proxy;
+export default ApiProxy;
 
 

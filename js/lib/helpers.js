@@ -1,5 +1,5 @@
 import { loading } from "./state.js";
-import Proxy from "./proxy.js";
+import Proxy from "./apiProxy.js";
 import { getRegisteredElements as element } from "./domElementsRegister.js";
 
 /*

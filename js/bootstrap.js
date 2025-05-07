@@ -1,2 +1,2 @@
 import './lib/main.js';
-import './lib/proxy.js';
+import './lib/apiProxy.js';

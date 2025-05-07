@@ -1,4 +1,4 @@
-import Proxy from "./proxy.js";
+import ApiProxy from "./apiProxy.js";
 import { loading, userInput } from "./state.js";
 import { toggleLoadingMessageAndButton, checkLoading } from "./helpers.js";
 import { getRegisteredElements as element } from "./domElementsRegister.js";
@@ -6,7 +6,7 @@ import { createLeaderBoard } from "./leaderBoard.js";
 import { addPlayerAnswerInputsListeners, detectNewNameInput } from './playerInputs.js';
 import { markAnswers } from './answers.js';
 
-export const sectionTwo = async (subject) => Proxy.getQuestionsAndAnswers(subject);
+export const sectionTwo = async (subject) => ApiProxy.getQuestionsAndAnswers(subject);
 export const sectionThree = (subject = null) => detectNewNameInput(); // Detect if the current section is section three and the re-populate inputs with already entered names
 
 export const sectionFour = (subject = null) => {
@@ -19,8 +19,8 @@ export const sectionFour = (subject = null) => {
   }, 500);
 }
 
-export const sectionFive = async (subject = null) => {
-  const questions = await Proxy.result.questions;
+export const sectionFive = (subject = null) => {
+  const questions = ApiProxy.result.questions;
 
   if (! loading.state) {
     const panels = [];
@@ -62,6 +62,7 @@ export const sectionFive = async (subject = null) => {
 }
 
 export const sectionSix = (subject = null) => {
+  console.log('result ', ApiProxy.result);
   markAnswers();
   createLeaderBoard();
   const congratsElement = document.getElementById('modal-body')
@@ -86,8 +87,23 @@ export const sectionSix = (subject = null) => {
 
 
 const sectionSeven = (subject = null) => {
-  const correctAnswers = await Proxy.result.answers;
-  // Get list of users' answers
+  console.log(ApiProxy.result)
+  if (! ApiProxy.result.answers || ! ApiProxy.result) alert('Something went wrong. Please refresh the quiz and try again.');
+  const listOfAnswers = ApiProxy.result.answers;
+  const listsOfPlayersAnswers = [];
+  userInput.players.forEach(player => {
+   listsOfPlayersAnswers.push(`<h2>${player.name}</h2><ul id="${player.id}-answers-list"></ul>`);
+  });
+
+  const answersDiv = document.getElementById('answers');
+  listsOfPlayersAnswers.forEach(list => answersDiv.innerHTML += list);
+
+  userInput.players.forEach((player, index) => {
+    player.answers.forEach((answer, index) => {
+      document.getElementById(`${player.id}-answers-list`).innerHTML +=
+      `<li>Question #${index +1}: Player answer: ${answer.answerValue} | Correct answer: ${listOfAnswers[index]}</li>`;
+    })
+  })
 }
 
 const sections = {
