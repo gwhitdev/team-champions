@@ -1,5 +1,5 @@
 import { setupElements, getRegisteredElements as element } from "./domElementsRegister.js";
-import { createNewPlayerInputs, handleNumOfPlayersButtons } from "./helpers.js";
+import { createNewPlayerInputs, handleNumOfPlayersButtons } from "./playerInputs.js";
 import sections from "./sectionActions.js";
 
 setupElements([

@@ -1,7 +1,10 @@
 import Proxy from "./proxy.js";
 import { loading, userInput } from "./state.js";
-import { toggleLoadingMessageAndButton, markAnswers, createLeaderBoard, addPlayerAnswerInputsListeners, detectNewNameInput, checkLoading } from "./helpers.js";
+import { toggleLoadingMessageAndButton, checkLoading } from "./helpers.js";
 import { getRegisteredElements as element } from "./domElementsRegister.js";
+import { createLeaderBoard } from "./leaderBoard.js";
+import { addPlayerAnswerInputsListeners, detectNewNameInput } from './playerInputs.js';
+import { markAnswers } from './answers.js';
 
 export const sectionTwo = async (subject) => Proxy.getQuestionsAndAnswers(subject);
 export const sectionThree = (subject = null) => detectNewNameInput(); // Detect if the current section is section three and the re-populate inputs with already entered names
