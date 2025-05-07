@@ -13,7 +13,6 @@ const Proxy = {
         this.result.answers = data.quiz.listOfAnswers.answers;
       })
       .then(() => console.info('Questions received...'))
-      .then(() => console.log(this.result))
       .catch(error => {
         console.log(error)
         this.result.error = error;
