@@ -9,20 +9,15 @@ setupElements([
   'body',
   'nav',
   '#modal',
-  '.numOfPlayersButtons',
   '#close-nav-button',
   '#close-modal-button',
   '.next-section-button',
   '#open-nav-button',
-  '#players-div',
-  '#symbols',
   '#section-five-button',
   '#loading-statement',
   '#start-quiz-statement',
   '#inputs',
   '.name-inputs',
-  '#number-of-players-1',
-  '.number-of-players-buttons',
   '#subject-input',
 ]);
 
@@ -54,6 +49,7 @@ for (let button of element('next-section-button')) {
 
       document.getElementById(nextSection).classList.remove('hide');
       document.getElementById(nextSection).classList.add('show');
+
       window.location = `#${nextSection}`;
     } catch (error) {
       Errors.showModal(error)

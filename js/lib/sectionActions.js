@@ -16,29 +16,8 @@ export const sectionTwo = async (subject) => {
     Errors.showModal(error);
   }
 }
+
 export const sectionThree = (subject = null) => {
-  const nameInputs = element('name-inputs')
-    for (let input of nameInputs ) {
-      input.addEventListener('input', (e) => {
-        const id = e.target.id.split('-')[1];
-        checkNameInputs();
-        userInput.players[id-1].name = e.target.value;
-      })
-    }
-}
-
-function checkNameInputs() {
-  for (let input of element('name-inputs')) {
-    try {
-      validateUserInput(input.value, 'section-three');
-    } catch (error) {
-      Errors.showModal(error);
-    }
-  }
-}
-
-export const sectionFour = (subject = null) => {
-  checkNameInputs();
   const timer = setInterval(() => {
     checkLoading();
     if (! loading.state) {
@@ -48,7 +27,7 @@ export const sectionFour = (subject = null) => {
   }, 500);
 }
 
-export const sectionFive = (subject = null) => {
+export const sectionFour = (subject = null) => {
   const questions = ApiProxy.result.questions;
 
   if (! loading.state) {
@@ -90,7 +69,7 @@ export const sectionFive = (subject = null) => {
   }
 }
 
-export const sectionSix = (subject = null) => {
+export const sectionFive = (subject = null) => {
   console.log('result ', ApiProxy.result);
   markAnswers();
   createLeaderBoard();
@@ -114,7 +93,7 @@ export const sectionSix = (subject = null) => {
   },4000)
 };
 
-const sectionSeven = (subject = null) => {
+const sectionSix = (subject = null) => {
   if (! ApiProxy.result.answers || ! ApiProxy.result) alert('Something went wrong. Please refresh the quiz and try again.');
   const listOfAnswers = ApiProxy.result.answers;
   const listsOfPlayersAnswers = [];
@@ -139,7 +118,6 @@ const sections = {
   'section-four': sectionFour,
   'section-five': sectionFive,
   'section-six': sectionSix,
-  'section-seven': sectionSeven,
 };
 
 export default sections;
