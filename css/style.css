@@ -268,13 +268,13 @@ button:hover {
   line-height: 8rem;
 }
 
-#number-of-players {
+#number-of-questions {
   font-size: 4rem;
 }
-#number-of-players {
+#number-of-questions {
   cursor: pointer;
 }
-#number-of-players::after {
+#number-of-questions::after {
   content: "";
   width: 2rem;
   height: 3rem;

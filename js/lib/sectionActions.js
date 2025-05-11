@@ -17,6 +17,8 @@ export const sectionTwo = (subject) => {
 }
 
 export const sectionThree = async (subject = null) => {
+
+
   try {
     await ApiProxy.getQuestionsAndAnswers(subject, userInput.numberOfQuestions);
   } catch (error) {

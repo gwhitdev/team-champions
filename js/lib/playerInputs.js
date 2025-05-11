@@ -4,6 +4,33 @@ import { validateUserInput } from "./inputValidation.js";
 import Errors from "./errors.js";
 
 /*
+Handle the number of questions buttons clicked.
+ */
+export const handleNumberOfQuestionsButtonsClicked = (event) => {
+  /* Update the number of questions */
+  if (event.target.id === 'more' && userInput.numberOfQuestions < 10) {
+    ++userInput.numberOfQuestions;
+  }
+
+  /* Check if the user is trying to go above 10 questions */
+  if (event.target.id === 'more' && userInput.numberOfQuestions === 10) {
+    Errors.showModal({'message': 'You cannot go above 10 questions'});
+  }
+
+  /* Check if the user is trying to go below 1 question */
+  if (event.target.id === 'less' && userInput.numberOfQuestions === 1) {
+    Errors.showModal({'message': 'You cannot go below 1 question'});
+  }
+
+  /* Update the number of questions */
+  if (event.target.id === 'less' && userInput.numberOfQuestions > 1) {
+    --userInput.numberOfQuestions;
+  }
+
+  element('number-of-questions-input').innerText = userInput.numberOfQuestions;
+}
+
+/*
   Handle updating the state of the answers for each player when the user enters an answer.
  */
 function handleAnswerInput(answerInput, playerId){

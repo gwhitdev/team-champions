@@ -2,6 +2,7 @@ import { setupElements, getRegisteredElements as element } from "./domElementsRe
 import sections from "./sectionActions.js";
 import { userInput } from "./state.js";
 import {validateUserInput} from "./inputValidation.js";
+import { handleNumberOfQuestionsButtonsClicked } from "./playerInputs.js";
 import Errors from "./errors.js";
 
 setupElements([
@@ -17,6 +18,8 @@ setupElements([
   '#inputs',
   '.name-inputs',
   '#subject-input',
+  '#number-of-questions-input',
+  '.number-of-questions-buttons',
 ]);
 
 element('close-nav-button').addEventListener('click', () => {
@@ -47,5 +50,11 @@ for (let button of element('next-section-button')) {
     } catch (error) {
       Errors.showModal(error)
     }
+  })
+}
+
+for (let button of element('number-of-questions-buttons')) {
+  button.addEventListener('click', (e) => {
+    handleNumberOfQuestionsButtonsClicked(e);
   })
 }
