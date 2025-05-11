@@ -4,19 +4,6 @@ import { createPlayerSymbols } from "./playerSymbols.js";
 import { validateUserInput } from "./inputValidation.js";
 import Errors from "./errors.js";
 
-const errorsModal = document.getElementById('errors-modal');
-/*
-  Add the input to an array of names to hold the state
- */
-export const detectNewNameInput = () => {
-  for (let input of element('name-inputs')) {
-    input.addEventListener('input', (e) => {
-      const id = e.target.id.split('-')[1];
-        userInput.players[id-1].name = e.target.value;
-    })
-  }
-}
-
 /*
   Detect and react to the number of players selected by the user
  */
@@ -67,19 +54,24 @@ export const createNewPlayerInputs = () => {
  */
 function handleAnswerInput(answerInput, playerId){
   const foundUser = userInput.players[playerId-1];
+
   if (foundUser.answers[answerInput.id.split('-')[1]]) {
     try {
       validateUserInput(answerInput.value, 'section-three');
       foundUser.answers[answerInput.id.split('-')[1]].answerValue = answerInput.value;
-
     } catch (error) {
       Errors.showModal(error);
     }
   } else {
-    foundUser.answers.push({
-      answerValue: answerInput.value,
-      answerCorrect: null
-    });
+    try {
+      validateUserInput(answerInput.value, 'section-three');
+      foundUser.answers.push({
+        answerValue: answerInput.value,
+        answerCorrect: null
+      });
+    } catch (error) {
+      Errors.showModal(error);
+    }
   }
 }
 
@@ -88,7 +80,6 @@ export const addPlayerAnswerInputsListeners = () => {
   for (let input of playerAnswerInputs) {
     try {
       validateUserInput(input.value, 'section-five');
-
       input.addEventListener('input', (e) => {
         handleAnswerInput(e.target, Number(e.target.dataset.playerid));
       })

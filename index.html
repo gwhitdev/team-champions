@@ -32,18 +32,18 @@
 
   <div id="nav-content">
     <div id="about">
-      <h2 class="honk">About</h2>
+      <h2 class="workbench pink">About</h2>
       <p class="workbench">
-        <span class="honk">Team Champions</span> is an online quiz generator that uses artificial intelligence to generate questions for a team of players.
+        <span class="honk">Knowledge Caravan</span> is an online quiz generator that uses artificial intelligence to generate questions for you to test and train your brain ... with a caravan of knowledge.
       </p>
       <p class="workbench">
         Is your work team a bit bored with the same-old, same-old? Take some valuable time-out and share some fun!
       </p>
     </div>
     <div id="whats-new">
-      <h2 class="honk">What's new?</h2>
+      <h2 class="workbench pink">What's new?</h2>
       <p class="workbench">
-        This is the first release of <span class="honk">Team Champions</span>!
+        This is the first release of <span class="honk">Knowledge Caravan</span>!
         There are lots of potential new features yet to come:<br>
         <ul class="workbench">
           <li>More configuration options</li>
@@ -51,30 +51,31 @@
           <li>Timers</li>
           <li>And lots more!</li>
         </ul>
-      <h2 class="honk">Request a feature</h2>
-      <div id="form" class="workbench">
-        <form id="feature-request">
-          Your name: <input type="text" name="name" required>
-          Your email: <input type="email" name="email" required>
-          <br>
-          <label for="feature-request-text">
+      <div id="feature-request">
+        <h2 class="workbench pink">Request a feature</h2>
+        <div id="form" class="workbench">
+          <form id="feature-request-form">
+            Your name: <input type="text" name="name" required>
+            Your email: <input type="email" name="email" required>
+            <br>
+            <label for="feature-request-text">
             <span>
               What would you like to see added?
             </span>
-          </label>
-          <textarea rows="10" id="feature-request-text" name="feature-request-text" required>
-          </textarea>
-          <br>
-          <div>
-            <label for="consent">
-              Can we contact you about this feature and any updates?
             </label>
+            <textarea rows="10" id="feature-request-text" name="feature-request-text" required>
+          </textarea>
             <br>
-            <input id="consent" type="checkbox" name="contact" value="yes"> [YES]
-          </div>
-
-          <button type="submit">Submit</button>
-        </form>
+            <div>
+              <label for="consent">
+                Can we contact you about this feature and any updates?
+              </label>
+              <br>
+              <input id="consent" type="checkbox" name="contact" value="yes"> [YES]
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -88,7 +89,7 @@
       <div id="hero">
         <div id="hero-text">
           <h1 id="welcome" class="honk">
-            Welcome to<br>Team Champions
+            Welcome to<br>Knowledge Caravan
           </h1>
             <div id="welcome-paragraph" class="workbench">
                 <p>
@@ -113,8 +114,10 @@
 
       <div id="section-two" class="hide workbench section">
         <div class="section-content">
-          <h2 id="number-question-1" class="show">How many players?</h2>
-          <span id="number-of-players-1"><!-- Space for displaying number of players selected--></span>
+          <h2 id="number-question-1" class="show">How many questions?</h2>
+          <div id="number-of-questions-input">
+            <!-- Placeholder for number of questions input -->
+          </div>
           <div id="players-div">
             <div id="numOfPlayersButtons">
               <button id="less" class="number-of-players-buttons workbench">&#11164; LESS </button>
@@ -161,14 +164,6 @@
       </div>
 
       <div id="section-six" class="hide workbench section">
-        <div class="section-content">
-          <h2>Results</h2>
-          <div id="leaderboard"><!--Placeholder for generated leaderboard--></div>
-          <button class="next-section-button" data-next="section-seven">Review answers &#11167;</button>
-        </div>
-      </div>
-
-      <div id="section-seven" class="hide workbench section">
 
         <div class="section-content">
           <h2>Review Your Answers</h2>

@@ -23,6 +23,10 @@ h2 {
   overflow: hidden;
 }
 
+.pink {
+  color: var(--deeperPink);
+}
+
 button {
   color: var(--white)!important;
   width: 100%;

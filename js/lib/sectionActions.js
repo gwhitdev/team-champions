@@ -3,7 +3,7 @@ import { loading, userInput } from "./state.js";
 import { toggleLoadingMessageAndButton, checkLoading } from "./helpers.js";
 import { getRegisteredElements as element } from "./domElementsRegister.js";
 import { createLeaderBoard } from "./leaderBoard.js";
-import { addPlayerAnswerInputsListeners, detectNewNameInput } from './playerInputs.js';
+import { addPlayerAnswerInputsListeners } from './playerInputs.js';
 import { markAnswers } from './answers.js';
 import {validateUserInput} from "./inputValidation.js";
 import Errors from "./errors.js";
@@ -13,12 +13,32 @@ export const sectionTwo = async (subject) => {
     validateUserInput(subject, 'section-two');
     await ApiProxy.getQuestionsAndAnswers(subject);
   } catch (error) {
-    Errors.add(error);
+    Errors.showModal(error);
   }
 }
-export const sectionThree = (subject = null) => detectNewNameInput(); // Detect if the current section is section three and the re-populate inputs with already entered names
+export const sectionThree = (subject = null) => {
+  const nameInputs = element('name-inputs')
+    for (let input of nameInputs ) {
+      input.addEventListener('input', (e) => {
+        const id = e.target.id.split('-')[1];
+        checkNameInputs();
+        userInput.players[id-1].name = e.target.value;
+      })
+    }
+}
+
+function checkNameInputs() {
+  for (let input of element('name-inputs')) {
+    try {
+      validateUserInput(input.value, 'section-three');
+    } catch (error) {
+      Errors.showModal(error);
+    }
+  }
+}
 
 export const sectionFour = (subject = null) => {
+  checkNameInputs();
   const timer = setInterval(() => {
     checkLoading();
     if (! loading.state) {
