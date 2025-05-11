@@ -2,22 +2,27 @@ import ApiProxy from "./apiProxy.js";
 import { loading, userInput } from "./state.js";
 import { toggleLoadingMessageAndButton, checkLoading } from "./helpers.js";
 import { getRegisteredElements as element } from "./domElementsRegister.js";
-import { createLeaderBoard } from "./leaderBoard.js";
 import { addPlayerAnswerInputsListeners } from './playerInputs.js';
 import { markAnswers } from './answers.js';
-import {validateUserInput} from "./inputValidation.js";
+import { validateUserInput } from "./inputValidation.js";
 import Errors from "./errors.js";
 
-export const sectionTwo = async (subject) => {
+export const sectionTwo = (subject) => {
   try {
     validateUserInput(subject, 'section-two');
-    await ApiProxy.getQuestionsAndAnswers(subject);
+    userInput.subject = subject;
   } catch (error) {
     Errors.showModal(error);
   }
 }
 
-export const sectionThree = (subject = null) => {
+export const sectionThree = async (subject = null) => {
+  try {
+    await ApiProxy.getQuestionsAndAnswers(subject, userInput.numberOfQuestions);
+  } catch (error) {
+    Errors.showModal(error);
+  }
+
   const timer = setInterval(() => {
     checkLoading();
     if (! loading.state) {
@@ -70,27 +75,7 @@ export const sectionFour = (subject = null) => {
 }
 
 export const sectionFive = (subject = null) => {
-  console.log('result ', ApiProxy.result);
   markAnswers();
-  createLeaderBoard();
-  const congratsElement = document.getElementById('modal-body')
-  element('modal').classList.add('show');
-  element('body').classList.add('stop-scrolling');
-  const timeLeft = {seconds: 4};
-  const countdown = document.getElementById('countdown');
-
-  const interval = setInterval(() => {
-    countdown.innerText = String(--timeLeft.seconds);
-    if (timeLeft.seconds === 0) {
-      countdown.innerText = "";
-      countdown.classList.add('hide')
-      clearInterval(interval)
-    }
-  },1000)
-
-  setTimeout(() => {
-    congratsElement.classList.remove('hide');
-  },4000)
 };
 
 const sectionSix = (subject = null) => {

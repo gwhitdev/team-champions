@@ -2,6 +2,7 @@
   Base initial state
  */
 export const userInput = {
+  numberOfQuestions: 10,
   errors: [],
   numberOfPlayers: 1,
   players: [
@@ -12,7 +13,4 @@ export const userInput = {
   ]
 };
 
-export const winner = { id: null };
-export const symbols = ["🚹"];
 export const loading = { state: true };
-export const playerNames = [];
