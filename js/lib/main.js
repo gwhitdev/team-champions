@@ -1,10 +1,11 @@
 import { setupElements, getRegisteredElements as element } from "./domElementsRegister.js";
 import sections from "./sectionActions.js";
-import { userInput } from "./state.js";
-import {validateUserInput} from "./inputValidation.js";
 import { handleNumberOfQuestionsButtonsClicked } from "./playerInputs.js";
 import Errors from "./errors.js";
 
+/*
+  Setup the DOM elements
+ */
 setupElements([
   'body',
   'nav',
@@ -39,14 +40,13 @@ for (let button of element('next-section-button')) {
   button.addEventListener('click', (e) => {
     const nextSection = e.target.dataset.next;
     try {
-      //validateUserInput(element('subject-input').value, nextSection);
       const subject = element('subject-input').value
-      if (Object.keys(sections).includes(nextSection)) sections[nextSection](subject);
+      if (Object.keys(sections).includes(nextSection)) sections[nextSection](subject); // Call the section action function.
 
       document.getElementById(nextSection).classList.remove('hide');
       document.getElementById(nextSection).classList.add('show');
 
-      window.location = `#${nextSection}`;
+      if (! Errors.present) window.location = `#${nextSection}`; // If no errors, go to the next section.
     } catch (error) {
       Errors.showModal(error)
     }
@@ -55,6 +55,6 @@ for (let button of element('next-section-button')) {
 
 for (let button of element('number-of-questions-buttons')) {
   button.addEventListener('click', (e) => {
-    handleNumberOfQuestionsButtonsClicked(e);
+    handleNumberOfQuestionsButtonsClicked(e.target.id);
   })
 }

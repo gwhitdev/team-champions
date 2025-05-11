@@ -5,12 +5,14 @@ import { userInput } from './state.js';
 const Errors = {
   errorsList: document.getElementById('errors-list'),
   errorsModal: document.getElementById('errors-modal'),
+  present: false,
   /*
   * Add an error to the state and create a list item to display it on the page.
    */
   add(error) {
     userInput.errors.push(error.message);
     this.createErrorMessage(error.message)
+    this.present = true;
   },
   /*
   * Create a list item to display an error on the page.
@@ -26,6 +28,7 @@ const Errors = {
   clear() {
     this.errorsList.innerHTML = "";
     userInput.errors = [];
+    this.present = false;
   },
   /*
   * Show the errors modal and hide it after 3 seconds.

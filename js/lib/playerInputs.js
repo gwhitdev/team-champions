@@ -6,27 +6,28 @@ import Errors from "./errors.js";
 /*
 Handle the number of questions buttons clicked.
  */
-export const handleNumberOfQuestionsButtonsClicked = (event) => {
-  /* Update the number of questions */
-  if (event.target.id === 'more' && userInput.numberOfQuestions < 10) {
-    ++userInput.numberOfQuestions;
-  }
-
+export const handleNumberOfQuestionsButtonsClicked = (buttonId) => {
   /* Check if the user is trying to go above 10 questions */
-  if (event.target.id === 'more' && userInput.numberOfQuestions === 10) {
+  if (buttonId === 'more' && userInput.numberOfQuestions === 10) {
     Errors.showModal({'message': 'You cannot go above 10 questions'});
   }
 
   /* Check if the user is trying to go below 1 question */
-  if (event.target.id === 'less' && userInput.numberOfQuestions === 1) {
+  if (buttonId === 'less' && userInput.numberOfQuestions === 1) {
     Errors.showModal({'message': 'You cannot go below 1 question'});
   }
 
   /* Update the number of questions */
-  if (event.target.id === 'less' && userInput.numberOfQuestions > 1) {
+  if (buttonId === 'more' && userInput.numberOfQuestions < 10) {
+    ++userInput.numberOfQuestions;
+  }
+
+  /* Update the number of questions */
+  if (buttonId === 'less' && userInput.numberOfQuestions > 1) {
     --userInput.numberOfQuestions;
   }
 
+  /* Update the number of questions on the page */
   element('number-of-questions-input').innerText = userInput.numberOfQuestions;
 }
 
@@ -60,7 +61,6 @@ export const addPlayerAnswerInputsListeners = () => {
   const playerAnswerInputs = document.getElementsByClassName('answer-input'); // Select all player answer inputs.
   for (let input of playerAnswerInputs) {
     try {
-      validateUserInput(input.value, 'section-five');
       input.addEventListener('input', (e) => {
         handleAnswerInput(e.target, Number(e.target.dataset.playerid));
       })

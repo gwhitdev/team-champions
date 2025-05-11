@@ -17,8 +17,6 @@ export const sectionTwo = (subject) => {
 }
 
 export const sectionThree = async (subject = null) => {
-
-
   try {
     await ApiProxy.getQuestionsAndAnswers(subject, userInput.numberOfQuestions);
   } catch (error) {
@@ -62,7 +60,7 @@ export const sectionFour = (subject = null) => {
       const answersDiv = panel.querySelector('.answers');
       answersDiv.innerHTML = userInput.players.map(player => `<input type="text" data-playerid="${player.id}" id="question-${i}-player-${player.id}" class="answer-input" placeholder="${player.name}'s answer">`).join('');
     }
-    document.getElementById('team-questions').append(...panels);
+    document.getElementById('player-questions').append(...panels);
     addPlayerAnswerInputsListeners(); // Set event listeners for the player answer inputs.
   }
 
