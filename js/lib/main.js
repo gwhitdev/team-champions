@@ -2,6 +2,7 @@ import { setupElements, getRegisteredElements as element } from "./domElementsRe
 import sections from "./sectionActions.js";
 import { handleNumberOfQuestionsButtonsClicked } from "./playerInputs.js";
 import Errors from "./errors.js";
+import {userInput} from "./state.js";
 
 /*
   Setup the DOM elements
@@ -58,3 +59,5 @@ for (let button of element('number-of-questions-buttons')) {
     handleNumberOfQuestionsButtonsClicked(e.target.id);
   })
 }
+
+//console.log(userInput);

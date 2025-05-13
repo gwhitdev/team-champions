@@ -74,11 +74,9 @@ export const sectionFour = (subject = null) => {
   }
 }
 
-export const sectionFive = (subject = null) => {
+const sectionFive = (subject = null) => {
   markAnswers();
-};
 
-const sectionSix = (subject = null) => {
   if (! ApiProxy.result.answers || ! ApiProxy.result) alert('Something went wrong. Please refresh the quiz and try again.');
   const listOfAnswers = ApiProxy.result.answers;
   const listsOfPlayersAnswers = [];
@@ -87,7 +85,9 @@ const sectionSix = (subject = null) => {
   });
 
   const answersDiv = document.getElementById('answers');
-  listsOfPlayersAnswers.forEach(list => answersDiv.innerHTML += list);
+  listsOfPlayersAnswers.forEach(list => {
+    answersDiv.innerHTML += list
+  });
 
   userInput.players.forEach((player, index) => {
     player.answers.forEach((answer, index) => {
@@ -102,7 +102,6 @@ const sections = {
   'section-three': sectionThree,
   'section-four': sectionFour,
   'section-five': sectionFive,
-  'section-six': sectionSix,
 };
 
 export default sections;

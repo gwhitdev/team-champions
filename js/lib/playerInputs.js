@@ -35,6 +35,7 @@ export const handleNumberOfQuestionsButtonsClicked = (buttonId) => {
   Handle updating the state of the answers for each player when the user enters an answer.
  */
 function handleAnswerInput(answerInput, playerId){
+  console.log(userInput.players)
   const foundUser = userInput.players[playerId-1];
 
   if (foundUser.answers[answerInput.id.split('-')[1]]) {

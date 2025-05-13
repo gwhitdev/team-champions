@@ -5,6 +5,7 @@ import ApiProxy from "./apiProxy.js";
  */
 export const markAnswers = () => {
   userInput.players.map(player => {
+    //console.log('player.answers: ', player.answers)
     player.answers.forEach((answer,index) => {
       if (jacquardSimilarity(index, new Set(answer.answerValue.toLowerCase())) >= 1) {
         player.answers[index].answerCorrect = true;

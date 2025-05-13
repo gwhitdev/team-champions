@@ -8,7 +8,8 @@ export const userInput = {
   players: [
     {
       id: 1,
-      name: 'Player 1'
+      name: 'Player',
+      answers: []
     }
   ]
 };
