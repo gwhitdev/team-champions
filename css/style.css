@@ -409,6 +409,10 @@ button:hover {
   color: var(--deepBlue);
 }
 
+#answers {
+  overflow: scroll;
+  height: 70%;
+}
 
 
 /** BREAK POINTS **/

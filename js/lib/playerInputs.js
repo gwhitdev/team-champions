@@ -35,7 +35,6 @@ export const handleNumberOfQuestionsButtonsClicked = (buttonId) => {
   Handle updating the state of the answers for each player when the user enters an answer.
  */
 function handleAnswerInput(answerInput, playerId){
-  console.log(userInput.players)
   const foundUser = userInput.players[playerId-1];
 
   if (foundUser.answers[answerInput.id.split('-')[1]]) {
@@ -60,10 +59,19 @@ function handleAnswerInput(answerInput, playerId){
 
 export const addPlayerAnswerInputsListeners = () => {
   const playerAnswerInputs = document.getElementsByClassName('answer-input'); // Select all player answer inputs.
+
   for (let input of playerAnswerInputs) {
+    let timeoutId = null;
+
     try {
       input.addEventListener('input', (e) => {
-        handleAnswerInput(e.target, Number(e.target.dataset.playerid));
+
+        if (timeoutId) clearTimeout(timeoutId); // Clear the timeout if it exists.
+
+        timeoutId = setTimeout(() => {
+          handleAnswerInput(e.target, Number(e.target.dataset.playerid)); // Call the handleAnswerInput function to validate the input after debouncing
+        }, 3000)
+
       })
     } catch (error) {
       Errors.showModal(error);

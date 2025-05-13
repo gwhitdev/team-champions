@@ -22,6 +22,7 @@ setupElements([
   '#subject-input',
   '#number-of-questions-input',
   '.number-of-questions-buttons',
+  '#play-again-button'
 ]);
 
 element('close-nav-button').addEventListener('click', () => {
@@ -36,6 +37,9 @@ element('open-nav-button').addEventListener('click', () => {
   element('body').classList.add('stop-scrolling');
 });
 
+element('play-again-button').addEventListener('click', () => {
+  window.location = '/'; // Refresh the page.
+})
 
 for (let button of element('next-section-button')) {
   button.addEventListener('click', (e) => {
@@ -59,5 +63,3 @@ for (let button of element('number-of-questions-buttons')) {
     handleNumberOfQuestionsButtonsClicked(e.target.id);
   })
 }
-
-//console.log(userInput);
