@@ -70,6 +70,7 @@ export const sectionFour = (subject = null) => {
       const nextQuestion = Number(e.target.dataset.nextquestion) + 1;
       document.getElementById(`question-${nextQuestion}`).classList.remove('hide');
       document.getElementById(`question-${nextQuestion-1}`).classList.add('hide');
+
     })
   }
 }

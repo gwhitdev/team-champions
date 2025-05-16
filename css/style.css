@@ -8,9 +8,7 @@ html {
   overflow: hidden;
 }
 
-h2 {
-  font-size: 5rem;
-}
+
 
 .hide {
   display: none;
@@ -65,22 +63,23 @@ nav {
   overflow: auto;
 }
 
-nav::-webkit-scrollbar-track {
-  background: var(--deepBlue);
+nav::-webkit-scrollbar, html::-webkit-scrollbar {
+  width: 12px;
+  background-color: var(--deepBlue);
 }
-
-nav::-webkit-scrollbar-thumb {
+nav::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb {
   background-color: var(--deepPink);
   border-radius: 6px;
   border: 3px solid var(--deepBlue);
 }
 
-nav::-webkit-scrollbar-thumb:hover {
+nav::-webkit-scrollbar:hover, html::-webkit-scrollbar-thumb:hover {
   background-color: var(--deeperPink);
 }
+
 nav p, nav ul{
-  font-size: 2rem;
-  line-height: 3rem;
+  font-size: 1rem;
+  line-height: 2rem;
 }
 nav form {
   display: flex;
@@ -105,8 +104,8 @@ nav input[type="text"], nav input[type="email"] {
 #nav-content {
   displaY: flex;
   flex-direction: column;
-  padding: 1rem 5rem;
-  width: 50%;
+  padding: 1rem 2rem;
+  width: 80%;
 }
 nav h2 {
   font-size: 3rem;
@@ -232,8 +231,8 @@ span.blink {
   background-color: var(--deepBlue);
 }
 button {
-  background-color: var(--deepBlue);
-  color: var(--deeperPink);
+  background-color: var(--deeperPink);
+  color: var(--deepBlue);
   border: 0.3rem solid var(--deeperPink);
   padding: 1rem 2rem;
   cursor: pointer;
@@ -258,6 +257,15 @@ button:hover {
   width: 100%;
   color: var(--white);
   text-align: left;
+}
+
+#section-two p {
+  line-height: 3rem;
+}
+
+#section-two h2 {
+  font-size: 3rem;
+  line-height: 4rem;
 }
 
 .section-content {
@@ -404,13 +412,23 @@ button:hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%;
-  background-color: var(--deepPink);
+  height: 14%;
+  padding: 1rem 2rem 0 0;
+  background-color: var(--deeperPink);
   color: var(--deepBlue);
 }
 
+#errors-modal h2 {
+  padding-left: 2rem;
+  font-size: 2rem;
+}
+
+#errors-modal li {
+  list-style: none;
+}
 #answers {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: 70%;
 }
 
@@ -418,7 +436,9 @@ button:hover {
 /** BREAK POINTS **/
 
 @media only screen and (min-width: 596px) {
-
+  h2 {
+    font-size: 5rem;
+  }
   button {
     width: 31rem;
     height: 8rem;
@@ -428,7 +448,7 @@ button:hover {
   }
   #open-nav {
     margin-top: 3rem;
-    color: var(--deepBlue);
+    color: var(--deeperPink);
   }
   #header {
     width: 80%;
@@ -469,5 +489,9 @@ button:hover {
   }
   nav {
     width: 65%;
+  }
+
+  #section-two {
+    line-height: 8rem;
   }
 }

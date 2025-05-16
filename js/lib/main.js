@@ -22,7 +22,8 @@ setupElements([
   '#subject-input',
   '#number-of-questions-input',
   '.number-of-questions-buttons',
-  '#play-again-button'
+  '#play-again-button',
+  '#single-or-plural-questions',
 ]);
 
 element('close-nav-button').addEventListener('click', () => {
@@ -61,5 +62,6 @@ for (let button of element('next-section-button')) {
 for (let button of element('number-of-questions-buttons')) {
   button.addEventListener('click', (e) => {
     handleNumberOfQuestionsButtonsClicked(e.target.id);
+    element('single-or-plural-questions').innerText = userInput.numberOfQuestions > 1 ? 'questions' : 'question';
   })
 }
